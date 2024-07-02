@@ -1,0 +1,19 @@
+div {
+    border: 5px solid black;
+}
+
+#div-1 {
+    border-color: red;
+    display: inline;
+}
+
+#div-2 {
+    border-color: green;
+    display: inline-block;
+    width: 300px;
+}
+
+#div-3 {
+    border-color: blue;
+    display: inline;
+}

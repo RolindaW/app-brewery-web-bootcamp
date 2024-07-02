@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+    color: #40514e;
+    font-family: "Merriweather", serif;
+}
+
+h1 {
+    color: #3aa6b9;
+    font-size: 5.625rem;
+    margin-bottom: 0;
+    font-family: "Sacramento", cursive;
+}
+
+h2 {
+    color: #3aa6b9;
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.5rem;
+    font-weight: normal;
+}
+
+h3 {
+    color: #3aa6b9;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.5rem;
+}
+
+.pro {
+    text-decoration: underline;
+}
+
+.container-banner {
+    padding: 0 5rem;
+    height: 150px;
+    background-color: #ffd0d0;
+}
+
+.container-about {
+    padding: 0 5rem;
+    background-color: #f9f9e0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    margin-left: 8rem;
+    border-radius: 50%;
+}
+
+.container-skill {
+    padding: 0 5rem;
+    background-color: #ff9eaa;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-skill-detail {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.item-skill {
+    max-width: 280px;
+}
+
+.icon-square {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+}
+
+.skill-pic {
+    float: left;
+    margin-right: 1rem;
+}
+
+.container-interest {
+    padding: 0 5rem;
+    background-color: #f9f9e0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-interest-detail {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.item-interest {
+    max-width: 280px;
+}
+
+.container-contact {
+    padding: 1.25rem 5rem;
+    background-color: #ffd0d0;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.container-contact-media {
+    /* As Item */
+    grid-column: span 2;
+
+    /* As Container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Extra Small */
+@media (max-width: 575px) {
+    html {
+        font-size: 12px;
+    }
+
+    .container-skill-detail {
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-columns: 1fr;
+    }
+
+    .container-contact {
+        grid-template-rows: 1fr 2fr 1fr;
+        grid-template-columns: 1fr;
+    }
+
+    .container-contact-media {
+        /* As Item */
+        grid-column: span 1;
+    }
+}
+
+/* Small */
+@media (max-width: 767px) {
+    .container-about {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .profile-pic {
+        margin-top: 5rem;
+        margin-left: 0;
+    }
+}
+
+/* Medium */
+@media (min-width: 576px) and (max-width: 991px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+/* Large */
+@media (min-width: 992px) {
+    html {
+        font-size: 16px;
+    }
+
+    .container-skill-detail {
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

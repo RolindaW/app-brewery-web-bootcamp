@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Relative</title>
+        <style>
+            .container {
+                margin: 10px 0;
+                border: 2px solid black;
+                display: block;
+            }
+
+            .main {
+                background-color: antiquewhite;
+            }
+
+            .relative {
+                background-color: powderblue;
+                width: 100%;
+            }
+
+            .min-fixed {
+                min-width: 150px;
+            }
+
+            .max-fixed {
+                max-width: 75px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Relative property value type</h1>
+        </header>
+        <main>
+            <div class="container main">
+                Non-fixed
+                <div class="container relative">Relative</div>
+                <div class="container relative min-fixed">Relative min-fixed</div>
+                <div class="container relative max-fixed">Relative max-fiexd</div>
+                <div class="container relative min-fixed max-fixed">Relative min-max-fixed</div>
+            </div>
+            <div class="container main" style="width: 40px">
+                Fixed
+                <div class="container relative">Relative</div>
+                <div class="container relative min-fixed">Relative min-fixed</div>
+                <div class="container relative max-fixed">Relative max-fiexd</div>
+                <div class="container relative min-fixed max-fixed">Relative min-max-fixed</div>
+            </div>
+        </main>
+    </body>
+</html>

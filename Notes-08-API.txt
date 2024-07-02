@@ -1,0 +1,22 @@
+
+- API
+
+	Application
+	Programming Interface: bridge the communication between two pieces of software by some rule or protocol definition.
+	
+	Specify how to make the request and how the response is going to be given.
+	Popular architectures: GraphQL, SOAP, REST (most popular among web development; use HTTP protocol to interact with the API), gRPC.
+	Public (external use; expose specific features; well documented) vs. private (internal use e.g. between web application frontend and backend).
+	Response is most commonly formatted in JSON - Warning! It can be provided in multiple sockets so it needs to be rebuilt before processing.
+
+- API Structure
+
+	API Endpoint: a FIXED route on the API provider server (e.g. "base-url/endpoint"; begin after the base URL, separated by forward-slash "/" symbol); used to define different purposes of the API.
+	Query parameter: additional info about the query (e.g. "base-url/endpoint?query:value"; begin after the endpoint, separated by question-mark "?" symbol; allow multiple key-value pairs separated by ampersand "&" symbol); used for filtering and searching.
+	Path parameter: a NON-FIXED parameter (e.g. "base-url/endpoint/path-parameter"; begin after the endpoint, separated by forward-slash "/" symbol); used to represent an specific resource (e.g. id, username).
+	Body: the content of the request (e.g. a document - in the form of a byte array - to be loaded into the server).
+
+- JSON
+
+	JavaScript Object Notation: JS object is just serialized (so similar syntax) so later parsing within JS is immediate.
+	Allow to send data in a readable (altough using a JSON visualizer is recommended) but also efficient way.

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flex</title>
+        <style>
+            .container {
+                margin: 10px 0;
+                border: 2px solid black;
+            }
+
+            .main {
+                background-color: antiquewhite;
+                display: flex;
+                /* flex-flow: row nowrap; */
+                /* justify-content: flex-start; */
+                gap: 20px;
+            }
+
+            .item {
+                background-color: aquamarine;
+            }
+
+            .sized {
+                width: 100px;
+            }
+
+            .basis {
+                flex-basis: 150px;
+            }
+
+            .min-fixed {
+                min-width: 200px;
+            }
+
+            .max-fixed {
+                max-width: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Flex sizing priority</h1>
+        </header>
+        <main>
+            <div class="container main">
+                <div class="container item">Item</div>
+            </div>
+
+            <div class="container main">
+                <div class="container item">Item</div>
+                <div class="container item sized">Item sized</div>
+            </div>
+
+            <div class="container main">
+                <div class="container item">Item</div>
+                <div class="container item sized">Item sized</div>
+                <div class="container item sized basis">Item sized basis</div>
+            </div>
+
+            <div class="container main">
+                <div class="container item sized basis min-fixed">Item sized basis min-fixed</div>
+            </div>
+
+            <div class="container main">
+                <div class="container item sized basis min-fixed">Item sized basis min-fixed</div>
+                <div class="container item sized basis max-fixed">Item sized basis max-fized</div>
+            </div>
+
+            <div class="container main">
+                <div class="container item sized basis min-fixed">Item sized basis min-fixed</div>
+                <div class="container item sized basis max-fixed">Item sized basis max-fized</div>
+                <div class="container item sized basis min-fixed max-fixed">Item sized basis min-max-fixed</div>
+            </div>
+
+            <div class="container main">
+                <div class="container item">Item</div>
+                <div class="container item sized">Item sized</div>
+                <div class="container item sized basis">Item sized basis</div>
+                <div class="container item sized basis min-fixed">Item sized basis min-fixed</div>
+                <div class="container item sized basis max-fixed">Item sized basis max-fized</div>
+                <div class="container item sized basis min-fixed max-fixed">Item sized basis min-max-fixed</div>
+            </div>
+        </main>
+    </body>
+</html>

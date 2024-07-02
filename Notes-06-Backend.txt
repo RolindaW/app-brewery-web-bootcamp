@@ -1,0 +1,198 @@
+
+- Backend
+
+	Website (single webpage or multiples webpages): frontend (client side - GUI & Interaction).
+	Web application: frontend + backend (server side - business logic) - Warning! User makes requests to the backend through the frontend; the backend will respond accordingly.
+	Backend: server (hosting) + application (business logic) + database (data persistance; optional i.e. it can be managed in different ways or may simply not be necessary).
+
+- Tools & Technologies
+
+	Frontend: HTML, CSS and JS (the only stuff that a Browser can work with); frameworks e.g. React, Angular or Vue (all in JS).
+	Backend: pretty much any programming language e.g. Java, Ruby, PHP, C#, Python, or JS; frameworks e.g. Spring (Java), Ruby on Rails (Ruby), Laravel (PHP), ASP.NET (C#), Flask, DJango (Python), Node.js (JS).
+	
+	Why use a framework? Reuse componenets (e.g. file access, networking, data stream, URL string, error codes, test, debug, diagnostics); reduce overhead.
+
+- Node.js
+
+	Asynchronous event-driven JS runtime - Warning! Not considered a framework itself.
+	
+		Asynchronous: execution is not sequential.
+		Event-driven: use of events to execute code chunks.
+		JS Runtime: run JS out of the browser; JS was originally designed to run in the browser only (not possible to write any program other than a website); Node.js uses V8 engine (written in C++) which allows JS to run in any other environment e.g. desktop or server side applications (i.e. not exclusive to web development).
+	
+	Build scalable network applications.
+	Installation: need to be downloaded from official site, then installed - Warning! Check installed version with "node --version" command in Windows Command Shell.
+	
+	Node REPL:
+	
+		REPL (Read Eval Print Loop): Environment (not exclusive to Node e.g. Google DevTool JS Console, Python REPL, Git Replit) where user inputs are read and evaluated, and then results are returned back (by printing) to the user.
+		Node REPL: allow running JS code.
+		
+		"node" - Warning! Must be issued in Windows Command Shell: initialize Node REPL; it can also be used to run JS files "node js-filename" (in fact, this is the main use we will give it).
+		
+		(Node REPL special commands)
+		".exit" or "CTRL+D": exit Node REPL.
+		"CTRL+C": abort current expression - Warning! Also valid to exit Node REPL.
+		".help": more information about Node REPL.
+		".break" or ".clear": get unstuck.
+	
+	Native Node modules:
+	
+		Warning! It is different from JS Browser API (e.g. "window.console.log("foo");" will fail as "window" object is not defined in Node).
+		
+		Reference and usage: CJS vs. ESM
+		Warning! It is not necessary to import the complete module; it is possible to import only the desired functionality if required.
+		CJS (CommonJS): synchronous loading; "require" keyword e.g. "const module-name = require("module-name");" and then use like "module-name.method( args )".
+		ESM (ECMAScript Modules): asynchronous loading; "import" keyword e.g. "import * as module-name from "module-name";" and then use the same.
+		
+		(File system - "node:fs")
+		Utilities for interacting the local storage.
+		"readFile"
+		"writeFile"
+		
+		(Path - "node:path")
+		Utilities for working with file and directory paths.
+		"dirname"
+		
+		(URL - "node:url")
+		Utilities for URL resolution and parsing.
+		"fileURLToPath"
+	
+	Node.js and Python analogy:
+	
+		Warning! Python is described as a programming language, but it is really much more.
+		Programming Language (Interpreted): JS vs. Python
+		Interpreter: JS vs. Python
+		Runtime: Node.js vs. Python
+		REPL: Node.js REPL vs. Python Standard REPL
+		Web (backend) framework: Express vs. Django (or Flask)
+
+- NPM (Node Package Manager):
+
+	Open source software registry - Warning! Despite its name, is not exclusive to Node.
+	Utility to install and manage external Node modules.
+	Already pre-bundled with Node.js installation - Warning! Check installed version with "npm --version" command in Windows Command Shell.
+	
+	"npm init": create and initialize "package.json" configuration file - Warning! Must be issued in Windows Command Shell.
+	Use "-y" flag to skip settings e.g. "npm init -y".
+	"package.json": configuration file to manage all module dependencies within the application project (referenced by specifying "index.js" entry JS file).
+	NPM uses CJS by default; to use ESM, the "type: module" parameter must be explicitly specified.
+	
+	"npm install package-name" (or "npm i package-name"): download a copy of specified package into the application project (plus update dependencies in "package.json" configuration file) - Warning! Must be issued in Windows Command Shell.
+	Modules can be installed per project (by default) or globally (use "-g" flag; files are downloaded into a Node common directory).
+	Use "npm install" to install all dependencies specified in "package.json" configuration file - Warning! Project dependencies are usually ignored in the repository backup, so the cloned repository will be missing the files of the corresponding external Node modules (not exclusive of backend web applications).
+
+- Popular external Node modules
+
+	Express
+	
+		Web framework built on top of Node.js.
+		Add specific functionality of the web backend e.g. middleware and routing.
+		Install with NPM e.g. "npm install express" and import as ESM e.g. "import express from "express";".
+		Static files (e.g. assets, styles or scripts) are commonly stored within a "public" directory.
+		
+		It can be used to create and run (actually executed by Node.js) a server i.e. the part of the application in charge of listening and processing the client's requests (among others) 
+		"app" (object): the server itself e.g. "const app = express();".
+		
+		(Server)
+		"port" (number): location of the server where the application will be listening for requests from the client.
+		"listen" (instance method): initialize the server to a specific port e.g. "app.listen( port, callback() );" - Warning! Trigger callback function when server is set up.
+		It is possible to make HTTP GET request from the browser in a simple manner e.g. "https://localhost:port" (where "localhost" is the alias of "127.0.0.1" IP address) - Warning! The server will respond with an error as long as it is not listening to the corresponding request.
+		
+		(Middleware)
+		Warning! It is possible writting custom middleware: a function accepting a HTTP request object, a HTTP response object and the next function (i.e. whatever commes after it e.g. following middleware - declaration ordering matters - or corresponding HTTP request handler).
+		"use": (instance method) e.g. "app.use( callback );" - Warning! On templating tell Express where static files are located with "app.use(express.static("dirname"));".
+		
+		(Request)
+		"route" (string): a.k.a. Endpoint or URL; path (file or directory) within the web application; root (/).
+		"get" (instance method): listen for HTTP GET request on specified route e.g. app.get( route, callback( req, res ) );".
+		"post" (instance method)
+		"put" (instance method)
+		"patch" (instance method)
+		"delete" (instance method)
+		
+		(Response)
+		"send" (instance method)
+		"sendFile" (instance method) - Warning! Only for static files.
+		"render" (instance method)
+		"locals" (property): set variables accessible in templates rendered with "render" - Warning! Using "locals.var-name" allows checking for variable existence without crash.
+	
+	nodemon
+	
+		Monitor for any changes in the source of the project and automatically restart the server (suitable for development).
+		Install globally with NPM e.g. "npm install -g nodemon"; use it (e.g. "nodemon js-filename") instead of native Node.js (e.g. "node js-filename") to run JS files.
+		Warning! On Windows, in case of using PowerShell to execute "nodemon" possibly an Execution Policies error is thrown (it is necessary to modify the security policy for the user - recommending RemoteSigned instead of Unrestricted); using Command Shell there is no problem.
+	
+	body-parser
+	
+		Middleware; pre-processing.
+		Serialization (i.e. object to string) vs. deserialization (or parsing i.e. string to object).
+		Parse (i.e. convert from text to code) the body of a HTTP request (used commonly to handle a "form" HTML element); data is provided in the form of a new "body" property in the HTTP request.
+		Install with NPM e.g. "npm install body-parser" - Warning! All its functionality is already included in Express.
+		"urlencoded" (instance method)
+	
+	morgan
+	
+		Middleware; logging.
+		Log the HTTP request comming into the server.
+		"morgan"  (instance method)
+	
+	EJS (Embedded JavaScript)
+	
+		Templating language.
+		Popular alternatives: handlebars, pug, TWIG (PHP), Jinja (Python).
+		Define views with dynamic (i.e. to be interpreted - rendered - on the fly) ".ejs" files (HTML code enhanced with EJS syntax "<% EJS %>") - Warning! Must be located within "views" directory (or any relative path to this directory).
+		Require to know where static files are located so they can be referenced relatively (e.g. HTML document that needs to load the corresponding styles) within dynamic pages during rendering.
+		
+		Templating: dynamically embedded content (text or HTML).
+		Partial: dynamically embedded EJS file.
+		
+		(Tags)
+		"<%= JS %>": JS giving an output (can be an expression or just a variable); used for templating text content.
+		"<% JS %>": JS - Warning! Output, if given, is not evaluated.
+		"<%- HTML %>": used for templating HTML content.
+		"<%%" or "%%>": escape EJS opening or closing tag.
+		"<%# comment %>"
+		"<%- include("EJS-filename") %>": embed another EJS file (i.e. a partial).
+	
+	Axios
+	
+		Utility for consuming public REST API - Warning! It can also be implemented with "https" native Node module.
+		Install with NPM e.g. "npm install axios".
+		Promise-based handling: async-await vs. then.
+
+- HTTP
+
+	HyperText
+	Transfer Protocol: a language or ruleset computers (i.e. client & server) can use for communicating (i.e. request & response).
+	
+	(Request)
+	GET: to request a resource (e.g. an HTML website, a piece of text, a piece of data from the Database) from the server.
+	POST: to send a resource (e.g. registering a sign up form) to the server.
+	PUT: to replace (full update) a resource in the server.
+	PATCH: to patch up (partial update) a resource in the server.
+	DELETE: to remove a resource from the server.
+	
+	(Response)
+	Status code: standard numeric code to notify the client of the request handling result.
+	Informational responses: 100 - 199
+	Successful responses: 200 - 299
+	Redirection messages: 300 - 399
+	Client error responses: 400 - 499
+	Server error responses: 500 - 599
+
+- Middleware (web application)
+
+	Warning! Definition related to the field of web development
+	Work with a request before it is processed in the final destination.
+	Placed in between the server request listener and individual route handlers.
+	
+	(Common operations)
+	Pre-processing: perform any kind of evaluation or change to the request.
+	Logging: record how long it take te request to came trought or the type of request.
+	Authentication: check if the client is authorized to make the request.
+	Error checking: check and fix errores in the request.
+
+- Templating language
+
+	Embed JS (content - text or HTML - or UI functionality) into HTML files (e.g. display customized welcome message with newly registered user first name into home webpage main heading).

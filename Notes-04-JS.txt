@@ -1,0 +1,254 @@
+
+- Programming fundamentals with JS
+
+	Compiled (translate all the instructions at once - "-piler"; fast process - do not wait between instructions - but do not allow for redo) vs. Interpreted (translate all the instructions one by one - "inter-"; slow process - wait for translation - but allows for redo).
+	Debug: enter debugging mode adding the code line "debugger;" - Warning! Developer mode must be active in corresponding browser.
+	Comment:
+	
+		single-line e.g. "// comment".
+		multi-line e.g. "/* comment */".
+	
+	Primitive data type: "string", "number" (both integer and float point), "boolean", others (e.g. "null", "undefined", "NaN"); check using "typeof(var-name)".
+	
+		(Number)
+		Common mathematical operators: "+", "-", "*", "/", "%" (modulus).
+		Unitary increment operator: "var-name++" (increment value of "var-name" variable by 1).
+		Unitary decrement operator: "var-name--" (decrement value of "var-name" variable by 1).
+	
+	Variable:
+	
+		Declaration: "var var-name;" - Warning! It is possible to initialize on declaration.
+		Assigment: operator "=" e.g. "var-name = value;" - Warning! There are alternative assigment operators e.g. "+=", "-=", "*=", "/=".
+		Naming: use meaningful names; be consistent with rules (e.g. use "camelCase" always); can contain characters, numbers, dolar sign and undescore - Warning! Numbers and keywords only if both combined and not in the beginning.
+	
+	Comparator:
+	
+		"==": loose equality (i.e. compare two values applying type conversion); include special handling for NaN, -0, and +0; corresponding inequality operator "!=".
+		"===": strict equality (i.e. compare two values without applying type conversion); include special handling for NaN, -0, and +0; corresponding inequality operator "!==".
+		"Object.is()": strict equality; do not include special handling for NaN, -0, and +0.
+		">", ">=", "<", "<=": greater than, greater or equal to, lesser than, lesser or equal to.
+	
+	Combinator:
+	
+		"&&": and.
+		"||": or.
+		"!": not.
+	
+	Control flow:
+	
+		if-else statements e.g. "if ( condition ) { body } else { body }" - Warning! Alternative conditions e.g. "else if ( condition ) { body }".
+		switch statement e.g. "switch ( expression ) { case case-expression: case-statements ... default: default-statements }".
+	
+	Control statement:
+	
+		while loop: unknown number of iterations (state) e.g. "while ( condition ) { body }".
+		for loop: known number of iterations (iterate) e.g. "for ( start; end; update ) { body }".
+	
+	Function:
+	
+		Declaration: "function-name ( function-arguments ) { function-body }" - Warning! It can optionally output a value using "return" keyword e.g. "return output-value;".
+		Naming: see variables naming.
+		High order function: accept other functions name as argument.
+		Named function vs. anonymous function (i.e. unnamed function; can use alternatively the syntax "( function-arguments ) => { function-body }").
+	
+	Object - Warning! From OOP (Object-Oriented Programming) paradigm.
+	
+		Represent a concept.
+		Constructor: return an object instance of corresponding class; use "new" keyword on call - Warning! Preferred naming syntax is PascalCase.
+		Property: describe something about the object e.g. "object.property;"; getter (retrieve current value of the property) vs. setter (asign a new value to the property).
+		Method: an action (or function) the object can do e.g. "object.method ( args )"; instance (require an instance of the object in order to be called) vs. static (do not require an instance of the object in order to be called).
+	
+	Event:
+	
+		Trigger: who causes the event.
+		
+			User action (e.g. click mouse button or tap keyboard).
+			API (e.g. represent the progress of an asynchronous task).
+			Programatically (e.g. calling a method of an element).
+			Dispatch to a specific target.
+		
+		Listener: who notices the event; register a handler - Warning! Listener and handler work together - terms are usually accidentally interchanged.
+		
+			Handler registering mechanisms:
+			
+				Method "addEventListener" (recommended): e.g. "element.addEventListener("event-type", handler-function);".
+				Event handler properties: e.g. "element.on-event-type = handler-function;"; cannot add more than one handler for a single event; avoid using (obsolete).
+				Inline event handlers: e.g. "<tag on-event-type="handler-function()"></tag>"; avoid using (obsolete; bad practice - separation of concerns).
+		
+		Handler: who manages the event.
+		
+			Whenever declared, first (and only first) argument - any name is valid - holds corresponding event object (which includes information about the trigger).
+			Use "this" keyword for self-reference.
+			Also known as a callback function - Warning! Commonly registered as an anonymous function.
+		
+		Specific event (only available on some elements) vs. global event (available on - nearly - any element).
+		Event delegation: handler element is different from trigger element.
+	
+	API (Application Programm Interface): an interface to interact with another system (which may be a library i.e. a collection of code that does a job).
+
+- JS resources
+
+	Standard built-in object
+	
+		("String")
+		"+" (operator): concatenation.
+		"length" (instance property): get the number of characters of the string e.g. "var-name.length;".
+		"slice" (instance method): extract a substring of the string e.g. "var-name.slice(start-index, end-index);".
+		"toUpperCase" (instance method): get the string converted to uppercase e.g. "var-name.toUpperCase();".
+		"toLowerCase" (instance method): get the string converted to lowercase e.g. "var-name.toLowerCase();".
+		
+		("Array") - Warning! While it is commonly a primitive type in other programming languages, it is not in JS.
+		A collection of elements e.g. "var var-name = [ element-1, element-2, ..., element-n ];". - Warning! JS arrays can contain a mix of different data types; otherwise, see "TypedArray" standard built-in object.
+		Access elements by position (i.e. indexing) e.g. "var-name[element-index]".
+		"length" (instance property): get the number of elements of the array e.g. "var-name.length;" - Warning! JS arrays are resizable.
+		"includes" (instance method): determine whether an array includes a certain value e.g. "var-name.includes(element-value)".
+		"push" (instance method): add specified elements to the end of an array (and returns the new length of the array) e.g. "var-name.push(element)".
+		"pop" (instance method): removes the last element from an array (and returns that element) e.g. "var-name.pop()".
+		
+		("Math")
+		"floor" (static method): rounds down and returns the largest integer less than or equal to a given number e.g. "Math.floor(value);".
+		"round (static method): returns the value of a number rounded to the nearest integer e.g. "Math.round(value)".
+		"pow" (static method): returns the value of a base raised to a power e.g. "Math.pow(base, exponent);".
+		"random (static method): returns a pseudo-random floating point number in the range [0, 1) e.g. "Math.random();" - Warning! It can be scaled as "Math.floor(Math.random() * range) + offset;".
+		
+		(JSON)
+		"stringigy": serialize JS object into JSON formatted string.
+		"parse"; deserialize JSON formatted string into JS object.
+	
+	Web APIs - Warning! Not in the JS language, but built into the browser.
+	
+		("Window")
+		"alert" (instance method): display a pop-up e.g. "alert("message");". 
+		"prompt" (instance method): display a prompt to input data e.g. "prompt("message");".
+		"console" (instance property): reference to the console object.
+	
+		("Console") - Warning! Use only for debugging purposes (not for presenting information to the user) e.g. check values of variables at specific points in the code or time how long an operation takes to complete.
+		"log" (static method): log a message into the console e.g. "Console.log("message");".
+		
+		("Document Object Model - DOM")
+		Represent any webpage loaded in the browser and serves as an entry point into its content (HTML document along all contained HTML elements) in a form of a logical tree structure.
+		
+		(Select)
+		"firstElementChild" (property): return first child element of the document; return null if no child elements.
+		"lastElementChild" (property): return last child element of the document; return null if no child elements.
+		"querySelector" (instance method): return the first element within the document that matches the specified selector - or group of selectors; return null if no matches found.
+		"querySelectorAll" (instance method): return a collection of elements within the document that matches the specified selector - or group of selectors; return null if no matches found.
+		"getElementsByTagName" (instance method): return a collection of elements with the given tag name.
+		"getElementsByClassName" (instance method): return a collection of elements with the given class name - Warning! Do not need to specify "." sign.
+		"getElementById" (instance method): return the element with the given id - Warning! Do not need to specify "#" sign.
+		
+		("Event")
+		Represent an event which takes place on a target.
+		"target" (property): a reference to the object onto which the event was dispatched (can be used to implement event delegation).
+		
+		("UIEvent")
+		Represent simple user interface events.
+		"KeyboardEvent" (interface): describe a user interaction with the keyboard.
+		
+		("EventTarget")
+		Represent an object that can receive events and may have listeners.
+		Interface inheritance: "EventTarget" < "Node" < "Element" < "HTMLElement" < corresponding interface from "HTML DOM" API.
+		"addEventListener" (instance method): register an event handler of a specific event type on the target e.g. "element.addEventListener("event-type", event-handler);".
+		"removeEventListener" (instance method): remove an event listener from the target.
+		"dispatchEvent" (instance method): dispatch an event to this target.
+		
+		("Node")
+		"textContent" (property): represent the text content of the node and its descendants.
+		
+		("Element")
+		The most general base class from which all element objects in a document inherit.
+		Only has methods and properties common to all kinds of elements.
+		
+		(Select)
+		"firstElementChild" (property)
+		"lastElementChild" (property)
+		"querySelector" (instance method)
+		"querySelectorAll" (instance method)
+		"getElementsByTagName" (instance method)
+		"getElementsByClassName" (instance method)
+		
+		(Manipulate)
+		"innerHTML" (property): get/set the HTML content of the element - Warning! Not the text content, but the whole HTML content i.e. all descendent HTML code if nested HTML elements.
+		"classList" (property): add/remove/toggle a class from the class-list of the element - Warning! Recommended to implicitly manipulate applied styles.
+		"attributes" (property): return a collection of all attributes registered to the specified node.
+		"getAttribute" (instance method): return the value of a specified HTML attribute on the element.
+		"setAttribute" (instance method): set the value of an HTML attribute on the specified element.
+		
+		("HTMLElement")
+		Represent any HTML element.
+		Some elements directly implement this interface (e.g. "HTMLButtonElement"), while others implement it via an interface that inherits it (e.g "HTMLAudioElement" via "HTMLMediaElement".).
+		"style" (property): get/set inline style of the element - Warning! Not recommended (separation of concerns).
+		
+		("HTML DOM")
+		Define the functionality of all HTML elements.
+		Made up of multiple interfaces (e.g. "HTMLButtonElement" for "button" HTML element or "HTMLAudioElement" + "HTMLMediaElement" for "audio" HTML element).
+		"setTimeout" (global function): set a timer which executes a function or specified piece of code once the timer expires.
+
+- JS for the web
+
+	Java: because of collaborating with Sun Microsystems company (creator of Java programming language).
+	Script: like a movie script, indicates the instructions to be followed.
+	
+	Plain (raw; without external enhancement) JS is also known as Vanilla JS.
+	In the very beginning of the Internet and Web Browsers - before JS (JavaScript) was created - ALL the computations and business logic were executed in the server side (thus nothing in the client side).
+	History: LiveScript > JavaScript (programming language by Netscape - 1994) > JScript (interpreter by Microsoft - 1995/1996) > ECMAScript (European Computer Manufacturers Association - 1996/1997).
+	Originally front-end programming language (e.g. animation or user interation); nowadays also in back-end frameworks.
+	Supported by all of the major browsers.
+	
+	It is possible to define the scripting code in different locations:
+	
+		Inline: specific attributes of corresponding HTML elements e.g. "onLoad" for "body" or "onClick" for "button" - Warning! Be careful with mixing single and double quotation marks i.e. distinguish between attribute value and code literals.
+		Internal: "script" HTML tag embedding the code (e.g. "<script type="text/javacript">javascript</script>") - Warning! Not exclusive of JS e.g. WebGL GLSL code. Specified (by convention) at the bottom of the "body" HTML element so it do not try to manipulate non-existing content (otherwise, fail).
+		External: "script" HTML tag referencing an external source (e.g. "<script src="source" charset="UTF-8"></script>") plus corresponding JS file if local.
+	
+	Manipulating CSS from JS is not considered a good practice (separation of concerns); best way to achieve desired results is manipulating the class-list of an HTML element.
+
+- jQuery
+
+	External JS library intended to simplify the writing of JS code; includes also new HTML components.
+	Standard version (human readable) vs. minified version (just intended for the browser - minimize loading time).
+	
+	Reference the framework in a project - Warning! Use "script" HTML element (bottom of "body" HTML element).
+	
+		CDN - Online: load the library into the client from closest server - Warning! Most populer option use to be "Google CDN".
+		Offline: local copy of the library.
+	
+	Resources
+	
+		(Select)
+		"$("selector");": get single element or multiple elements targeted by the selector - Warning! Syntax "jQuery("selector");" is also valid.
+		
+		(Manipulate)
+		"element.css("property-name");": get CSS property value.
+		"element.css("property-name", value);": set CSS property value - Warning! Not recommended (separation of concerns).
+		"element.hasClass("class-name");"
+		"element.addClass("class-name");" (recommended): accepts multiple class names (separated with whitespace).
+		"element.removeClass("class-name");": accepts multiple class names.
+		"element.toggleClass("class-name");": accepts multiple class names.
+		
+		"element.text("value");": set text content.
+		"element.html("value");": set HTML content.
+		
+		"element.attr("attribute-name");": get HTML element attribute value.
+		"element.attr("attribute-name", value);": set HTML element attribute value.
+		
+		(Event)
+		Warning! Do not use obsolete way to register events (i.e. "element.event-type ( handler-function )").
+		"element.on ( "event-type", handler-function );": register a handler on specified event type for the element - Warning! Either single element or multiple elements.
+		"element.off ( ... )": unregister a handler.
+		"element.one ( ... )": register a handler that runs only once.
+		
+		"$(document)".on ( "ready", handler-function );": wait until HTML document is ready - Warning! It can be ommited if JS code is included at the bottom of "body" HTML element.
+		
+		(Create/Delete)
+		"element.before("value");": include specified HTML code into the HTML document just before corresponding element.
+		"element.after(value);": include specified HTML code into the HTML document just after corresponding element.
+		"element.prepend(value);": include specified HTML code into corresponding element (at the beginning).
+		"element.append(value);": include specified HTML code into corresponding element (at the ending).
+		"element.remove();"
+		
+		(Effects) - Warning! It is possible chaining animations.
+		"element.hide();", "element.show();", "element.toggle();": instant.
+		"element.fadeOut();", "element.fadeIn();", "element.fadeTo();", "element.fadeToggle();": fading.
+		"element.slideUp();", "element.slideDown();", "element.slideToggle();": collapse.
+		"element.animate();": custom.

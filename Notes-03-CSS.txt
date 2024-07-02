@@ -1,0 +1,329 @@
+
+- CSS
+
+	Cascading: style flows from general to specific.
+	Style Sheet: a way for specifying style consisting of defining rules in the form of property-value pairs. There are other alternatives besides CSS (e.g. SASS or LESS).
+	
+	Syntax: "selector { rules }" (where rules is "property-1: value-1; property-2: value-2; ... property-n: value-n;").
+	Inherited vs. non-inherited properties: certain undefined properties in the child are inherited from the parent or ancestor (computed value).
+	
+		"background-color": named colors vs. color codes (RGB vs. HEX) - Warning! Allows specifying alpha channel.
+		"background-image": "url("filename");".
+		
+		(Text)
+		"color"
+		"font-size": named fonts vs. number.
+		"font-weight": named weight (or keyword - "normal", "bold") vs. relative ("lighter", "bolder") vs. number ("100"-"900").
+		"font-family": "specific, generic" (specific: Times New Roman - serif or Helvetica - sans-serif; generic: serif - decorated edges - or sans-serif - right-angled edges).
+		"text-align"
+		"list-style": "none" value removes bullets.
+		
+		(CSS Box Model)
+		"width" & "height": dimension of the box.
+		
+			Static (pixel, point) vs. relative (em, rem, vh, percentage) values - Warning! Allows box resizing (it can be conditioned by either other properties of own HTML element or dimension settings of parent HTML element).
+			
+			"min-width"/"min-height": minimum width/height of the box on shrink - Warning! Overrides "width"/"height" property if less value; overrides "max-width"/"max-height" counterpart.
+			"max-width"/"max-height": maximum width/height of the box on grow - Warning! Overrides "width"/"height" property if greater value.
+		
+		"border": contour around the box ("thickness" "style" "color"); can be set "none".
+		
+			"border-width": ("top" "right" ""bottom "left" or "top/bottom" "right/left").
+			"border-top"/"border-right"/"border-bottom"/"border-left"
+			"border-radius": static (rounding) or relative (percentage - circle or oval) values.
+		
+		"padding": gap between the box and the border (same variants as border) - Warning! Extends the background.
+		"margin": gap outside the border (same variants as border) - Warning! DOES NOT extend the background.
+		
+		(Positioning) - Warning! Do not use for layout styling (not responsive)
+		"position": "static", "relative", "absolute", "fixed".
+		
+			"top"/"bottom" (mutually exclusive)
+			"right"/"left"
+			"z-index": depth (0 by default)
+		
+		(Displaying) - Warning! Do not use anything different from "grid" or "flex" for layout styling (not appealing - require to much work)
+		"display": "block", "inline", "inline-block", "grid", "flex" "none".
+		"float": make an HTML element to be displaced by others to specified side ("left", "right") if required - Warning! Recommended to use only for wrapping text; not practical - very tricky - for complex layout styling.
+		"clear": ignore any floating ("left", right "both") HTML element.
+	
+	Units of measure
+	
+		Static: pixel ("px"; 1/96 inch) vs. point ("pt"; 1/72 inch).
+		Relative: m-width ("em"; relative to parent HTML element font size - "16px" by default i.e. when not specified) vs. root-m-width ("rem"; relative to root HTML document element font size) vs. viewport width/height ("vw"/"vh"; relative to viewport dimensions) vs. percentage ("%"; relative to parent HTML element property).
+	
+	It is possible to define the style code in different locations (CSS allows separation of concerns) - Warning! There are some obsolete - avoid using - HTML tags that allow modifying the appearance of an HTML document.
+	
+		Inline: global HTML tag attribute "style" (e.g. <tag style="css-rules" />"). Do not need to specify a selector as it only applies to current HTML element (equivalent to ID selector on terms of specificity). Recomended only for a single HTML element, a specific section or testing purposes.
+		Internal: HTML tag "style" (e.g. "<style>css-full</style>"). Specified (by convention) in the "head" HTML element so required styles are loaded before the content (otherwise, just applied late - but do not fail). Required to specify a selector. Recomended only for a single HTML document.
+		External: HTML tag "link" (e.g. "<link rel="stylesheet" href="source" />") plus corresponding CSS file if local. Specified in the "head" HTML element. Style shared between multiple HTML documents (most common in industry - best practices).
+	
+	Selector: define target HTML elements to which the style rules will be applied.
+	
+		Universal selector: select all HTML elements (e.g. "* { ... }").
+		Type selector: select multiple HTML elements by a particular HTML tag (e.g. "tag { ... }").
+		Class selector: select multiple HTML elements by a particular HTML "class" global attribute (e.g. ".class_name { ... }").
+		Attribute selector: select multiple HTML elements by a particular HTML tag attribute under specified condition (e.g. "tag[attribute_condition] { ... }").
+		ID selector: select a single HTML element by a particular HTML "id" global attribute(e.g. "#unique_id { ... }") - Warning! "id" is unique per HTML-element within a HTML document.
+	
+		Combining selectors (select HTML elements more generally or more specifically - Warning! Main purpose is to minimize number of "class" (general) and "id" (specific) HTML attributes usage within HTML document):
+		
+		Group: apply the style to HTML elements targeted by any of specified selectors (OR operator); separated by comma "," (e.g. "selector1, selector2").
+		Chaining: apply the style to HTML elements targeted by of all of specified selectors (AND operator); consecutive - non-separated (e.g. "selector1selector2") - Warning! Specify the type selectors first to avoid confusion.
+		Child: apply the style to HTML elements targeted by the direct child - first generation descendant - selector of parent selector; separated by angle-bracket ">" (e.g. "parent-selector > child-selector").
+		Descendent: apply the style to HTML elements targeted by the descendent selector - generation independent - of the ancestor selector; separated by whitespace (e.g. "ancestor-selector descendent-selector").
+		Combination: mix previus combinators.
+	
+	Conflicting rules: determine (by importance) which of the rules manipulating the same property prevails.
+
+		4 categories: position > specificity > type > importance (most important) - Warning! Category ordering matters.
+	
+		Position: relative position of a rule within a style or a file (or multiple files); also of a value within a "class" HTML attribute (i.e. when assigning multiple class); the lower/latest the more important.
+		Specificity: how specific a selector is in terms of affected HTML elements; universal > type > class > attribute > id (most important)
+		Type: where the style code is declarated; external > internal > inline (most important)
+		Importance: keyword "!important".
+		
+		Start comparing importance level from the most important category.
+		If more than one rule have same importance level within a category, skip to the next category (only for those rules sharing same importance level - ignore others - and repeat); otherwise, finish.
+		It is certain that any conflict will be resolved in the last category at the latest, since it is not possible to define more than one rule per line.
+	
+	Positioning:
+	
+		Static (default): HTML elements positioning flows from top to bottom.
+		Relative: position relative to own default (static) position.
+		Absolute: position relative to nearest positioned (different from default) ancestor position (Warning! Overlapping may occur) or top left corner of HTML document.
+		Fixed: position relative to top-left corner of browser window (i.e. webpage scrolling does not affect).
+	
+	Displaying:
+	
+		Warning! While these values work together within a shared layout (being either main layout or a subset of this), flex and grid modes work independently.	
+	
+		Block (default in most cases): DO NOT allow any other HTML element in the same line (even if space available); "width" and "height" properties (and corresponding min and max properties) can be manually set.
+		Inline: allow other HTML elements in the same line (fill only required space - by content) until all available line width is filled up (automatic line jump); "width" and "height" properties (and corresponding min and max properties) CANNOT be manually set.
+		Inline-block (and other variations): similar to inline display mode, but "width" and "height" properties (and corresponding min and max properties) can be manually set.
+		None: not displayed.
+	
+	Layout and responsiveness (adaptability for different window - or device - sizes): media query vs. CSS Flexbox vs. CSS Grid vs. external framework - Warning! It is common to combine multiple layout tools.
+	
+	Media query:
+	
+		Warning! Use it in combination with layout tools.
+		
+		Apply a set of styles to a media target under a given media condition (or breakpoint) (e.g. "@media target(condition) { styles }") - Warning! Combine conditions using keywords: "and".
+		Targets: "screen" (default - can be ommited), "print".
+		Properties: "min-width", "max-width", "orientation".
+	
+	CSS Flexbox:
+	
+		Native CSS tool to define a 1D layout - Warning! 2D layout is possible (but not recommended) by nesting containers.
+		Container vs. items.
+		Main axis (in the flexing direction) vs. cross axis (perpendicular to main axis) - Warning! The effect of some item properties will be conditioned by main axis direction.
+		
+			(CONTAINER)
+			"display": "flex" (occupy all line width - similar to "block") vs. "inline-flex" (allow other HTML elements in the same line; fill only required space - by content) - Warning! "box" (2009) and "flexbox" (2011) values target legacy versions.
+			"gap": items spacing.
+			"flex-direction": set main axis direction; "row" (default - horizontal), "row-reverse" (invert sense), "column" (vertical), "column-reverse".
+			"flex-wrap": items wrapping mode; "nowrap" (overflow - by default), "wrap" (jump to next line if no available space), "wrap-reverse".
+			"flex-flow": set main axis direction and items wrapping mode at same time (accepts 2 values - one for each property).
+			
+			(Aligment)
+			"justify-items": Warning! Ignored in Flexbox layouts.
+			"justify-content": items aligment on main axis (independent of the wrapping mode); "flex-start" (by default), "flex-end", "center", "space-between" (ocuppy all space leaving gaps between items), "space-around" (ocuppy all space leaving gaps between items and edges - smaller), "space-evenly" (ocuppy all space leaving same gaps between items and edges).
+			"align-items": items aligment on cross axis when WRAPPING is DISABLED - single item line; "flex-start" (by default), "flex-end", "center", "stretch".
+			"align-content": items aligment on cross axis when WRAPPING is ENABLED - single or multiple item lines (spacing between lines takes effect); "flex-start" (by default), "flex-end", "center", "space-between", "space-around", "space-evenly".
+			
+			(ITEM)
+			"display": Warning! Automatically overriden (i.e. CANNOT be manually set) to "block" UNLESS "flex" or "grid".
+			"width"/"height": Overriden to fit to the content, but can be manually set.
+			
+			(Aligment)
+			"order": item position within the container ("0" by default); arrangement order within the container - HTML code - makes the difference on items with same ordering level.
+			"align-self": item aligment on cross axis (override container setting on property "align-items")
+			
+			(Sizing) - Warning! "flex-grow" and "flex-shrink" properties override "width", "height" and "flex-basis" properties but not corresponding min and max properties.
+			"flex-grow": factor ("0" by default) of how much of container remaining space (width/height - main axis dependent) should be assigned to the item; up to items "max-width"/"max-height" property (main axis dependent).
+			"flex-shrink": factor ("0" by default) of how much an items size (width/height - main axis dependent) should decrease when container remaining space is not enough for items requirements; up to items "min-width"/"min-height" property (main axis dependent).
+			"flex-basis": set item "width"/"height" property (main axis dependent) value - Warning! Ignored if grow and shrink are set; "auto" (by default - assign space according to the content), "0" (equal space), number.
+			"flex": set flexing grow, shrink and basis at same time (accepts up to 3 values - one for each property) - Warning! Single value will affect only grow and shrink, making basis being "0".
+			
+		Flex sizing (i.e. grow and shrink) priority:
+		
+			Warning! Specified "width"/"height" and "flex-basis" item property values are overriden if there is not enough available space in the container; corresponding min and max properties are always respected.
+			Content width/height > "width"/"height" property > "flex-basis" property > "min-width" & "max-width"/"min-height" & "max-height" properties (most important)
+	
+	CSS Grid
+	
+		Native CSS tool to define a 2D (grid) layout - Warning! 1D layout is possible but items sizing and aligment is grid-based style (less flexible than Flexbox).
+		Container vs. items.
+		Track: term equivalent to both row and column.
+		Grid line: gap between rows (horizontal) and columns (vertical) - Warning! The only (just collectively) property that can be set is the gap size.
+		Grid cell: tracks intersection - Warning! An item can ocuppy single or multiple cells - also known as span; item overlapping is allowed.
+		
+			(CONTAINER)
+			"display": "grid" (occupy all line width - similar to "block").
+			"gap": items spacing (i.e. grid lines size).
+			
+			(Sizing)
+			"grid-template-rows": rows distribution.
+			"grid-template-columns": columns distribution.
+			"grid-template": set grid template rows and columns at same time - Warning! Use "/" separator.
+			
+				Static ("px", "pt") or relative ("em", "rem") - Warning! Not responsive.
+				"auto": row - fit to content; column - take all remaining space.
+				"fr": fractional - weight distribution - size value for a row/column.
+				"%": percentage.
+				"minmax(min-value, max-value)": define minimum (shrink) and maximum (grow) size values for a row/column.
+				"repeat(count, value)": specify (same) value-sized count-number of rows/columns.
+			
+			"grid-auto-rows": size of automatically created rows.
+			"grid-auto-columns": size of automatically created columns.
+			"grid-auto-flow": set grid auto rows and colums at the same time.
+			
+			(ITEM)
+			"display": Warning! Automatically overriden (i.e. CANNOT be manually set) to "block" UNLESS "flex" or "grid".
+			
+			(Placement)
+			"order": item position within the container ("0" by default).
+			
+			Warning! Span syntax is relative between start and end properties (in any of both possible ways: start relative to end vs. end relative to start) of corresponding row or column - i.e. it can be specified only in one of the properties.
+			Warning! It is possible to specify only the start or end property if only one cell in the corresponding direction (row or column) is to be covered.
+			"grid-row-start": starting horizontal grid line; number (positive from left - negative from right - Warning! Sense is reversed) vs. auto (remaining) vs. span (syntax "span span-value").
+			"grid-row-end": ending horizontal grid line - Warning! Number is exclusive.
+			"grid-row": set item starting and ending horizontal grid lines (or row span) at the same time - Warning! Use "/" separator or span syntax "span span-value".
+			
+			"grid-column-start": starting vertical grid line.
+			"grid-column-end": ending vertical grid line.
+			"grid-column": set item starting and ending vertical grid lines (or column span) at the same time.
+			
+			"grid-area": set item both horizontal and vertical starting and ending grid lines (ordering "grid-row-start", "grid-column-start", "grid-row-end", "grid-column-end") - Warning! Use "/" separator or span syntax "span span-value".
+			
+		Items distribution: by row - Warning! Span property with value different from 1 can lead to confusion.
+		
+			Less number of items than available spaces: empty spaces.
+			Greater number of items than available spaces: additional rows/columns are automatically created (column width - match; row height - fit to content).
+	
+- Bootstrap
+
+	External CSS framework: provide tools with which it is possible to customize the appearance (CSS) and functionality (JS) of both existing native and new higher level web components.
+		
+		Recommended: applications that despite not requiring a specific look and feel, a professional and responsive finish is expected, and all this in an agile way.
+		NOT recommended: applications where styling is not important or applications requiring a high level of detail where complete control is a must.
+		Popular alternatives: Foundation, MUI or Tailwind.
+	
+	Reference the framework in a project - Warning! Use "link" (appearance - CSS; within "head" HTML element) and "script" (functionality - JS; bottom of "body" HTML element) HTML elements.
+	
+		CDN (Content Delivery Network) - Online: load the framework into the client from closest server.
+		Offline: local copy of the framework.
+		
+	Built on top of CSS Flexbox.
+	Based on the use and combination of predefined classes - Warning! It is possible overriding the styles of the framework taking advantage on CSS importance prioritization system (conflicting rules).
+	
+	Breakpoint
+	
+		Width-responsive (commonly based on "min-width" property) variant of a class (i.e. corresponding class style is applied if media condition is met).
+		Keywords: extra-small "xs" (by default), small "sm", medium "md", large "lg", extra-large "xl", 2-extra-large "xxl", full "fluid".
+	
+	12 column (responsive) layout system: container > row > column (all "div" HTML elements).
+	
+		Container: contain all the rows.
+		Class: "container".
+		Breakpoint class variants: "container-xs", "container-sm", ..., "container-fluid".
+		
+		Row: contain corresponding columns (each row is considered to contain up to 12 same-sized columns).
+		Class: "row".
+		
+		Column: contain corresponding item.
+		Class: "col" (fit available line space).
+		Breakpoint class variants: "col-xs", "col-sm", ..., "col-fluid".
+		Relative - out of 12 - sizing class variants: "col-1", "col-2", ..., "col-12".
+		
+		Warning! Combining variants is allowed (e.g. col-md-8).
+		Warning! It is common to specify multiple class variants for the same HTML element to apply different styles depending on active breakpoint (e.g. "col-sm-12", "col-md-8" and "col-lg-3" for a column).
+	
+	It is possible to define certain CSS properties through the use of classes.
+	
+		Spacing: "{property}{sides}-{breakpoint}-{size}" - Warning! Breakpoint can be ommited for extra-small "xs".
+		
+			Property: margin "m", padding "p".
+			Sides: all (just blank), top and bottom "y", left and right "x", top "t", bottom "b", start (left) "s", end (right) "e".
+			Size: eliminate "0", .25*spacer "1", .5*spacer "2", spacer "3", 1.5*spacer "4", 3*spacer "5", automatic "auto".
+		
+		Sizing (e.g. "w-25", "h-50" or "h*" - where "*" can be "1", "2", ..., "6").
+		Aligment (e.g "align-items-*" or "justify-content-*" - where "*" can be "start", "center", ...).
+		Ordering (e.g "flex-row-reverse" or "order-lg-3").
+	
+	Pre-built components (or snippets):
+	
+		Warning! Bootstrap sample code may include additional styles that are not part of framework core; inspect the code and copy required styles.
+		
+		Color: "primary", "secondary", "success", "danger", "warning", "info", "light", "dark" - Warning! Must be appended to an actual component class.
+		Dark-mode: flip all the colors using attribute "data-bs-theme" with value "dark" in the "html" HTML element.
+		
+		Button: "btn": used along with color variants e.g. "btn-primary" - Warning! Require "button" HTML element.
+		Card: "card"
+		Navigation bar: "navbar" - Warning! Require "nav" HTML element.
+		Heroes
+		Jumbotron
+		Features
+		Carousel
+		Footer
+	
+	Themes (or templates): it is possible to find both free and paid themes built with Bootstrap framework.
+
+- Web design principles (pillars)
+
+	Warning! Having the complete design (structure, colors, fonts, sizes, margins, etc.) before proceeding with implementation is extremely important; otherwise, it is very likely that time will be wasted in research, consultation and decision making on design issues that do not pertain to the actual implementation process.
+	In any case, it is more productive to tackle the implementation of the structure first (HTML) and the styling application (CSS) later. However, this approach means delaying the final results.
+	
+	Color theory
+	
+		Create a right palett to be consistent with the actual message.
+		Mood: defined by predominant color.
+		
+			Red: love, energy (car companies), intensity.
+			Yellow: joy, intellect, attention - Warning! Recommended for specific moments that require special attention; may be counterproductive in the long term.
+			Green: freshness (food companies), safety, growth.
+			Blue: stability, trust (financial companies e.g. Paypall, Coinbase), serenity.
+			Purple: royalty, wealth (payday loan companies), femininity.
+		
+		Combinations (scientific way) - Warning! It is possible to use tools that offer predefined color palettes or that assist you in the creation process.
+		
+			Analogous color palette: colors right next to each other in the color wheel; look harmonious e.g. navigation bar and body or a logo and its background; not good popping (or standing out).
+			Complementary color palette: colors from opposite ends of the color wheel; look popping (i.e. bring out each of the colors) e.g. in the supermarket green grass separators for meat (red) items; not good for text and background.
+			Triadic color palette: drawing an equilateral triangle or a perfect square.
+	
+	Typography
+	
+		Legibility (how easy is something to read; properties: open shapes, ample intercharacter spacing, unambiguous forms, varying proportions) vs. readability (how pleasant is something to read).
+		Warning! The age of a font can be measured by the difference between the thickest and thinnest parts of a letter (gets more exaggerated as more modern is).
+	
+		Families:
+		
+			Serif: decorated edges; look traditional, stable, respectable, serious, authoritative, old e.g. a letterhead for a legal company or a magazine for architectural design; sub-families: old style, transitional, modern, slab.
+			Sans-serif: right-angled edges; look sensible, simple, straightforward, approachable e.g. start-up websites; sub-families: grotesque, neo-grotesque, humanist (highly legible and readable), geometric.
+			Script: look personal, creative, elegant.
+			Display: look friendly, load, amusing.
+			Modern: look stylish, chich, smart.
+		
+		Use (recommended) a maximum of 2 fonts in a single design (look cleaner and tighter); otherwise can look cluttered and unprofessional.
+		Similar mood and time era vs. Contrast serif-ness and weights.
+	
+	UI (User Interface) design
+	
+		Hierarchy: get most important information conveyed over first.
+		
+			Color: contrast (e.g. use colors in a grayscale or dark theme) important information; mute secondary information.
+			Size: make important information bigger.
+		
+		Layout: define blocks of text, use images; avoid both too long and too short texts (use 40-60 characters per line) i.e. chop content into smaller pieces.
+		Alignment: reduce the number of aligment points (i.e. use same aligment for multiple elements); look more professional and legible.
+		White (empty) space: make the content look more exclusive.
+		Audience: stay focused on the product audience (even if it can make look little bit messier or bolder in terms of color).
+	
+	UX (User Experience) design
+	
+		Simplicity: simple over complex.
+		Consistency: keep same design and functionality across the entire website; otherwise, it can make the user confused.
+		Reading patters: F-layout (prioritize top over bottom, and left over right); Z-layout.
+		Cross-platform: make content responsive (e.g. resize, show/hide or relocate).
+		AVOID dark patterns: get the user to perform an action that is beneficial to the company or the designer but that is not necessarily what the user wants.

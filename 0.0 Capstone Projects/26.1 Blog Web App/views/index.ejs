@@ -1,0 +1,15 @@
+<%- include("partials/header.ejs") %>
+
+        <h1>Welcome, Blogger!</h1>
+
+        <% if (locals.postList) { %>
+            <ul>
+                <% postList.forEach(post => { %>
+                    <li><%= post.title %></li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <h2 class="empty-post-advice">Start writing some posts...</h2>
+        <% } %>
+
+<%- include("partials/footer.ejs") %>

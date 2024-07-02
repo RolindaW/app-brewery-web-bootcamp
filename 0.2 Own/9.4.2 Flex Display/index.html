@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flexbox Display Prop Inheritance</title>
+        <style>
+            .container {
+                background-color: antiquewhite;
+                display: flex;
+                gap: 10px;
+            }
+
+            .item {
+                background-color: indianred;
+                border: 5px solid black;
+            }
+
+            .nd {
+                display: inline;
+            }
+
+            .rd {
+                display: inline-block;
+            }
+
+            .th4 {
+                display: flex;
+            }
+
+            .th5 {
+                display: grid;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="item st">Overriden to Block</div>
+            <div class="item nd">Overriden to Block</div>
+            <div class="item rd">Overriden to Block</div>
+            <div class="item th4">Keep Flex</div>
+            <div class="item th5">Keep Grid</div>
+        </div>
+    </body>
+</html>

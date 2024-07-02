@@ -1,0 +1,73 @@
+
+- Internet (Client & Server)
+
+	A very large wired (undersea) computer network.
+	Client: consume services; usually personal computers.
+	Server: offer services (web applications, storage, APIs...); usually high-performance (based on specialization e.g. web application or file storage) computers - but can be any, even locally; accessed via IP (Internet Protocol) address.
+	Warning! Some companies offer servers as a service (e.g. Amazon or Microsoft Azure); some companies hire them - rent - and others manage their own.
+	Flow:
+	
+		Find server IP address: Client - server alias > IPS (Internet Service Provider) - server alias > DNS server - server IP address > IPS - server IP address > Client
+		Client/Server request: Client - request > Server - response > Client
+
+- Web application
+
+	Application consisting of code written in HTML (HyperText Markup Language - content or structure), CSS (Cascading Style Sheet - appearance) and JS (JavaScript - functionality or behavior) - Warning! Separation of concerns.
+	The only required file type is HTML (because in the very beginnig of the Internet only HTML existed; it is possible to embed CSS and JS code in HTML files).
+	Hosted in a server: locally (development) or remotelly (production). Warning! A server is not required for local hosting while not backend code needs to be executed.
+	
+		Custom server
+		Rental server
+		GitHub Pages
+	
+	Code is sent to the client from the server under request so it can be processed (and so rendered) by the browser.
+	Project file structure:
+	
+		"index.html" file: home page (main HTML file).
+		"assets" folder: contain resources such as images, audio, or video (organized in corresponding subfolders).
+		"public" folder: contain static files.
+
+- Filepath
+
+	Path to a file or a folder location.
+	Absolute (from root) vs. Relative (from current location; common in web development).
+	Special characters:
+	
+		Go up a level (parent directory): "../"
+		Current directory: "./" (can be ommited, but sometimes fails)
+
+- Chrome DevTools (Tips)
+
+	Select an element in the page to inspect it (Hit "CRTL + SHIFT + C").
+	Toggle device toolbar - for testing different screen sizes (Hit "CRTL + SHIFT + M").
+	CSS overview (... > More tools > CSS overview).
+	Get element (In the Elements tab... Right click corresponding HTML element > Copy > Copy element).
+	Get element selector (In the Elements tab... Right click corresponding HTML element > Copy > Copy selector).
+	Modify style rules (In the Elements / Styles tab... Check/Uncheck rules AND/OR write new rules).
+	Visualize flex or grid container properties (In the Elements tab... Click "flex" or "grid" button of corresponding container HTML element).
+	Modify layout display (In the Elements / Layout tab... Set up desired options e.g. extend grid lines).
+	JS debugging & live programming (recommended for single-line code) (In the Console tab... Type and hit "ENTER" to run the code). Multiline JS instruction (In the Console tab ... Hit "SHIFT + ENTER").
+	Alternative live programming (recommended for multi-line code) - Snippet (In the Sources / Snippets tab ... Click "+ New snippet" to create new snippet - allow renaming; hit "CTRL + ENTER" to run the snippet).
+	Borwser hard reload (In DevTools mode ... Click and hold Reload button; then, select required option - "Normal Reload", "Hard Reload" or "Empty Cache and Hard Reload").
+
+- VS Code (& extensions)
+
+	Settings: File > Preferences > Settings
+	
+	(Editor: "Text Editor")
+	Default Formatter: Choose preferred formated (e.g. "Prettier - Code formatter").
+	Detect Indentation: Unchecked
+	
+	(Formatting: "Text Editor > Formatting")
+	Format On Type: Unchecked
+	Format On Paste: Unchecked
+	Format On Save: Checked
+	Format On Save Mode: "modificationsIfAvailable"
+	
+	(Prettier: "Extensions > Prettier")
+	Warning! Prettier will not work if there is any typo (typographical error)
+	Print Width: 800 (just a high value)
+	Prettier > Tab Width: 4
+	
+	Terminal: View > Terminal
+	It is possible to launch multiple profiles (e.g. PowerShell, Command Prompt) at same time.

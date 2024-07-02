@@ -1,0 +1,37 @@
+
+- Kernel
+
+	Software that interfaces with the hardware.
+	The core of the OS (Operating System).
+
+- Shell
+
+	Interface that allow the user to interact with the Kernel.
+	GUI (Graphical User Interface) vs. CLI (Command Line Interface); main difference is the degree of control they offer e.g. advanced file access - hidden or requiring special permissions - or use of advanced commands.
+
+- Bash (Bourne-Again SHell)
+
+	Unix OS Shell program (and command line language).
+	Windows OS analog: PowerShell - Warning! MS-DOS is far from being considered a scripting language.
+	Unix-like (or Unix-based) system e.g. Linux or Mac OS (run under a Unix-like system).
+	
+	Keyboard:
+	
+		"up"/"down": navigate command history.
+		"left"/"write": displace cursor within typed command.
+	
+	Navigation:
+	
+		Default directory is user (a.k.a. "~") i.e. "Mac HD / Users / user-name" ("C \ Users \ user-name" in Windows).
+		"ls": list files and directories ("dir" in Windows Command Shell).
+		"cd": change directory (same in Windows Command Shell); use ".." to navigate one level upwards (same in Windows Command Shell).
+		"pwd": print working directory.
+	
+	File management:
+	
+		"touch": create new file.
+		"rm": remove existing file; use "*" keyword to remove all files in a directory.; use "-r" flag to remove a directory.
+
+- Git Bash
+
+	Git proprietary Unix Shell emulator for Windows - Warning! It is not required in order to use Git from Windows command line; but recommended in order to emulate Git experience on Unix.

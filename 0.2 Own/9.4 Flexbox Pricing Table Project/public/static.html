@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Static</title>
+        <style>
+            .container {
+                margin: 10px 0;
+                border: 2px solid black;
+                display: block;
+            }
+
+            .main {
+                background-color: antiquewhite;
+            }
+
+            .static {
+                background-color: indianred;
+                width: 100px;
+            }
+
+            .min-fixed {
+                min-width: 150px;
+            }
+
+            .max-fixed {
+                max-width: 75px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Static property value type</h1>
+        </header>
+        <main>
+            <div class="container main">
+                Non-fixed
+                <div class="container static">Static</div>
+                <div class="container static min-fixed">Static min-fixed</div>
+                <div class="container static max-fixed">Static max-fiexd</div>
+                <div class="container static min-fixed max-fixed">Static min-max-fixed</div>
+            </div>
+            <div class="container main" style="width: 40px">
+                Fixed
+                <div class="container static">Static</div>
+                <div class="container static min-fixed">Static min-fixed</div>
+                <div class="container static max-fixed">Static max-fiexd</div>
+                <div class="container static min-fixed max-fixed">Static min-max-fixed</div>
+            </div>
+        </main>
+    </body>
+</html>

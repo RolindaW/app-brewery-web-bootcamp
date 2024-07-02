@@ -1,0 +1,80 @@
+
+- HTML
+
+	HyperText: (hyper)links between documents (or HTML files - .htm or .html).
+	Markup:	tags to define HTML elements type.
+	
+	HTML element: tag + content; non-void vs. void (no content).
+	
+		Tag: use of angle brackets: "<" & ">".
+		Opening "<tag>" tag and closing "</tag>" tag - optional for void HTML elements (recommended self-closing tag "<tag />").
+		Attribute: additional information of HTML elements; defined within opening tag in the form of name-value pairs (separated by whitespace); specific vs. global.
+	
+		Content: void vs. text vs. HTML element (nesting).
+		
+		(HTML Document) - Warning! Includes everything i.e. doctype preamble and root HTML element.
+		"html": root (top-level element) of an HTML document.
+		"head": HTML document head.
+		
+			"meta": HTML document metadata (additional data).
+			"title": HTML document title.
+			
+		"body": HTML document content.
+		
+			"header": both of HTML document content or individual article/section.
+			"nav": commonly for main navigation - parent of unordered list.
+			"main": unique per HTML document.
+			"article"
+			"section": both of HTML document content or individual article.
+			"footer": both of HTML document content or individual article/section.
+		
+		(Resources)
+		"link": commonly defined inside "head" HTML element; att: "rel", "href"; self-closing.
+		"script": att: "type", "src".
+		"img": att: "src", "alt"; self-closing.
+		"svg"
+		"a": anchor (or HTML document link); commonly combined with other HTML elements of different type such heading or image to create more fancy links; att: "href".
+		
+		(Appearence)
+		"style": content in the form of "selector{css}"; att: "class", "id".
+		"div": content division (used as a container).
+		"hr": horizontal rule; self-closing.
+		"br": break; self-closing.
+		
+		(List)
+		"ul": unordered list.
+		"ol": ordered list; att: "start".
+		"li": list item; content can be another list - nested lists; att: "value".
+		
+		(Table) - Warning! Do not use for layout styling.
+		"table"
+		"tr": table row.
+		"td": table data (used as a column).
+		
+		(Text)
+		"h1" - "h6": heading
+		"p": paragraph
+		"span": inline element (commonly used for text).
+		
+		(Interaction)
+		"button"
+		
+		(Form)
+		"form": att: "action" (HTTP request endpoint), "method" (HTTP request type).
+		"label": item caption (commonly used in pairs together with "input" HTML element) att: "for" ("name" HTML attribute value from corresponding "input" HTML element)
+		"input": interactive control to accept data from the user; att: "type" (e.g. text, button, submit), "name" (just an identifier), "value" (display text), "required"; self-closing.
+	
+	HTML boilerplate (i.e. the structure of an HTML file) - Warning! VS Code snippet: "!..." (file extension must be HTM or HTML).
+	
+		Doctype declaration: prevent a browser from switching into so-called "quirks mode" when rendering a HTML document (e.g. "<!DOCTYPE html>")
+		"html" HTML element (optional): HTML document root; contain all the HTML elements within the file (e.g. "<html lang="en"> ... </html>") - Warning! Required to specify the language of the content.
+		"head" HTML element: information about the website - not displayed to the user.
+		
+			"meta" (void) HTML element(s): additional info such as the character encoding (e.g. <meta charset="UTF-8" />) or how to display website when opening.
+			"title" HTML element: display-name of the website.
+		
+		"body" HTML element: content of the website.
+	
+	Indentation: make HTML elements hierarchy clearer for visual inspection.
+	Lorem Ipsum: placeholder text (online generator available); other alternatives available.
+	Lorem Picsum: placeholder image.

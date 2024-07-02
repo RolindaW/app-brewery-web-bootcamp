@@ -1,0 +1,53 @@
+
+- Version Control
+
+	Track and manage changes into working directory.
+
+- Git
+
+	Working directory <> Staging area (intermediate stage containing files to be commited) > Local Git repository <> Remote Git repository
+	
+	Command - Warning! All commands are issued within local Git repository.
+	
+		"git init": initialize Git local repository in current working directory - Warning! Stored in an automatically created ".git" (hidden) directory.
+		
+		"git status": check staged (within staging area) file changes.
+		"git add <filename>": stage untracked file changes from current working direcotry; use "." flag to specify all files inside current working directory.
+		"git rm --cached <filename>": unstage staged file changes; use "-r ." flag to recursivelly remove all.
+		
+		"git commit -m "<message>"": commit staged file changes into local Git repository identified by a message (for visual tracking; there is actually an internal hash for tracking purposes).
+		"git log": check commit history of active branch (i.e. the branch we are working at).
+		"git checkout <filename>": discard modified (either staged or unstaged) file changes (so last committed file version is restored into working directory).
+		"git diff <filename>": check differences between local Git repository and modified (either staged or unstaged) file versions.
+		
+		"git branch": check existing local (and remote) branches - Warning! Local Git repository should be updated first from remote Git repository to check actual remote branches status.
+		"git branch <new-branch-name>": create new branch from active branch.
+		"git checkout <branch-name>": switch to specified branch (making it active).
+		"git merge <branch-name>": merge a branch into active branch - Warning! Being merged branch (e.g. feature branch) should be originally branched from target active branch (e.g. main branch).
+		
+		"git remote add <remote-repository-name> <remote-repository-url>": link local Git repository to corresponding remote Git repository.
+		"git push -u <remote-repository-name> <branch-name>": push a branch into remote Git repository - Warning! Main branch (commonly so-called) is the branch where main progress is saved.
+		"git clone <remote-repository-url>": copy remote Git repository into current working directory (i.e. create local Git repository from remote Git repository).
+	
+	".gitignore" (hidden) configuration file: specify files and directories not to be tracked (e.g. sensitive data, executables, 3rd party libraries).
+	
+		(Syntax)
+		"filename": ignore specified file or directory; use "!" prefix to neglect ignoring (e.g. specific file or directory child of an ignored directory).
+		"#": comment
+		"*": filename prefix/suffix to refer ALL.
+	
+	Collaboration: multiple individuals working on same remote Git repository.
+	
+		Defining branch management rules and naming conventions is important to preserve heterogeneity.
+		PR (Pull Request): mechanism for safely merging changes into one of main branches (may be more than one depending on selected architecture e.g. development and production) a remote Git repository.
+		
+		(Methodology)
+		Branching: allow collaboration of individuals with both read and write permissions on a remote Git repository - Warning! Useful for team collaboration; individuals clone remote Git repository locally for working, lastly (apply for) submit changes via PR.
+		Forking: allow collaboration of individuals with only read permissions on a remote Git repository - Warning! Useful for outside collaboration; individuals copy remote Git repository on own remote space (which keep internally connected), then clone it locally for working, lastly (apply for) submit changes via PR.
+
+- GitHub
+
+	Utility for creation and management of remote Git repositories - Warning! Commonly named "origin".
+	Alternatives: GitLab, Azure DevOps, Bitbucket.
+	
+	Create remote Git repository (and then clone it locally) vs. Upload locally created repository - Warning! Remote Git repository must be previuosly created.

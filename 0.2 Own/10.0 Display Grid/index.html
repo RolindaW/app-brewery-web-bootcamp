@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .container {
+                display: grid;
+                grid-template-rows: auto;
+                grid-template-columns: auto auto;
+            }
+
+            .container > div {
+                background-color: indianred;
+                border: 5px solid black;
+            }
+
+            #item-1 {
+                font-size: xx-large;
+            }
+        </style>
+    </head>
+    <body style="height: 500px">
+        <div class="container">
+            <div id="item-1">Item 1</div>
+            <div id="item-2">Item 2</div>
+        </div>
+    </body>
+</html>
