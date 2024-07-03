@@ -159,14 +159,26 @@
 	
 		Utility for consuming public REST API - Warning! It can also be implemented with "https" native Node module.
 		Install with NPM e.g. "npm install axios".
-		Promise-based handling: async-await vs. then.
+		Promise-based handling: async-await vs. chaining (e.g. "action().then(). ... .then().catch().finally()").
+		
+		(REST API)
+		"get" (static method): e.g. "get(url, parameters);".
+		"post" (static method): e.g. "post(url, data, parameters);" where "data" stands for request body.
+		"put" (static method): as "post".
+		"patch" (static method): as "post".
+		"delete" (static method): as "get".
+		
+		(Parameters)
+		"params" (object): query parameters - Warning! Valid for API Key authorization.
+		"auth" (object): basic authentication username and password (e.g. "auth: { username: username-value, password: password-value }").
+		"headers" (object): headers - Warning! Valid for authentication header (e.g. "headers: { Authorization: `Bearer ${bearer-token-value}` }").
 
 - HTTP
 
 	HyperText
 	Transfer Protocol: a language or ruleset computers (i.e. client & server) can use for communicating (i.e. request & response).
 	
-	(Request)
+	(Request) - Warning! Request type only represents a declaration of interest of the server; what is actually done in the handling could (but should not) be totally different (e.g. update a record with the information of a delete request instead of deleting it).
 	GET: to request a resource (e.g. an HTML website, a piece of text, a piece of data from the Database) from the server.
 	POST: to send a resource (e.g. registering a sign up form) to the server.
 	PUT: to replace (full update) a resource in the server.

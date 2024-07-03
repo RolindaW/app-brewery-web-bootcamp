@@ -14,6 +14,7 @@
 	API Endpoint: a FIXED route on the API provider server (e.g. "base-url/endpoint"; begin after the base URL, separated by forward-slash "/" symbol); used to define different purposes of the API.
 	Query parameter: additional info about the query (e.g. "base-url/endpoint?query:value"; begin after the endpoint, separated by question-mark "?" symbol; allow multiple key-value pairs separated by ampersand "&" symbol); used for filtering and searching.
 	Path parameter: a NON-FIXED parameter (e.g. "base-url/endpoint/path-parameter"; begin after the endpoint, separated by forward-slash "/" symbol); used to represent an specific resource (e.g. id, username).
+	
 	Body: the content of the request (e.g. a document - in the form of a byte array - to be loaded into the server).
 
 - JSON
