@@ -20,3 +20,16 @@
 
 	JavaScript Object Notation: JS object is just serialized (so similar syntax) so later parsing within JS is immediate.
 	Allow to send data in a readable (altough using a JSON visualizer is recommended) but also efficient way.
+
+- Authentication
+
+	Protect resources behind the API by granting access only to authorized individuals.
+	Authentication (grant access to a registered - by username/password pair or token - user) vs. Authorization (grant access to a permitted - by key - client - i.e. non-registered user).
+	Token (issued by the API provider under demand for a registered user) vs. Key (issued by the API provider once for a client)
+	Authorization header: a type of request header containing authentication information; use "Authorization" header key; usually only one per request.
+	
+	Tiers - Warning! Encrypting sensitive data during communication (e.g a password) is a must in terms of security.
+	No authetication (No Auth): optionally add a rate limit (measured in RPS - Requests Per Second; identified by IP address) as a safety check to prevent API abuse; recommended when NOT handling changing data that needs to be protected or data that needs to be assigned to a specific user.
+	Basic authentication (Basic Auth): provide username and password (commonly as a Base64 encoded string) in the authorization header; use "Basic encoded-user-pwd-str" header value.
+	API-key-based authorization (API Key): provide a client key either in a specific header (use the key name and value as the header key and value, respectively) or as a query parameter.
+	Token-based authentication (OAuth / OAuth 2.0 - standard; e.g. Bearer Token): provide a user token in the authorization header; use "token-type-name token-value" header value.
