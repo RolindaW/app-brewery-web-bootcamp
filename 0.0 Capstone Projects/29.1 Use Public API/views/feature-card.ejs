@@ -1,0 +1,41 @@
+<%- include("partials/header.ejs") %>
+
+<nav>
+    <% if (locals.features) { %>
+    <% features.forEach(feature => { %>
+    <a href="<%= feature.link %>"><%= feature.name %></a>
+    <% }); %>
+    <% } else { %>
+    <p>Default message - Nav</p>
+    <% } %>
+</nav>
+
+<div>
+    <% if (locals.page) { %>
+    <div>
+        Paging
+        <a class="<%= page == 1 ? "disabled-link" : "" %>" href="/<%= featureName %>-prev">Prev</a>
+        <span><%= page %></span>
+        <a href="/<%= featureName %>-next">Next</a>
+    </div>
+    <% } else { %>
+    <p>Default message - Paging</p>
+    <% } %>
+
+    <% if (locals.items) { %>
+    <div>
+        <ul>
+            <% items.forEach(item => { %>
+            <li>
+                <p><%= item.name %></p>
+                <img class="img-list-item" src="<%= item.image.filename %>" alt="<%= item.image.description %>" />
+            </li>
+            <% }); %>
+        </ul>
+    </div>
+    <% } else { %>
+    <p>Default message - Item list</p>
+    <% } %>
+</div>
+
+<%- include("partials/footer.ejs") %>
