@@ -96,7 +96,7 @@
 		
 		(Server)
 		"port" (number): location of the server where the application will be listening for requests from the client.
-		"listen" (instance method): initialize the server to a specific port e.g. "app.listen( port, callback() );" - Warning! Trigger callback function when server is set up.
+		"listen" (instance method): initialize the server to a specific port e.g. "app.listen( port, callback );" - Warning! Trigger callback function when server is set up.
 		It is possible to make HTTP GET request from the browser in a simple manner e.g. "https://localhost:port" (where "localhost" is the alias of "127.0.0.1" IP address) - Warning! The server will respond with an error as long as it is not listening to the corresponding request.
 		
 		(Middleware)
@@ -105,6 +105,8 @@
 		
 		(Request)
 		"route" (string): a.k.a. Endpoint or URL; path (file or directory) within the web application; root (/).
+		"query parameters" (object): available as "query" object within "req" request object (e.g. "req.query.parameter-name;" or "req.query["parameter-name"];").
+		"path parameters" (object): available as "params" object within "req" request object (e.g. "req.params.parameter-name;" or "req.params["parameter-name"];").
 		"get" (instance method): listen for HTTP GET request on specified route e.g. app.get( route, callback( req, res ) );".
 		"post" (instance method)
 		"put" (instance method)
@@ -112,9 +114,11 @@
 		"delete" (instance method)
 		
 		(Response)
-		"send" (instance method)
-		"sendFile" (instance method) - Warning! Only for static files.
-		"render" (instance method)
+		"send" (instance method): send plain or standard formatted (e.g. HTML, JSON, or XML) text - Warning! Plain text can be interpreted later in the destination.
+		"json" (instance method): send JSON formatted text.
+		"sendStatus" (instance method): send a response with an auto-generated message according to the specified status.
+		"sendFile" (instance method): send a static file.
+		"render" (instance method): send the result of preprocessing specified templated file.
 		"locals" (property): set variables accessible in templates rendered with "render" - Warning! Using "locals.var-name" allows checking for variable existence without crash.
 	
 	nodemon
