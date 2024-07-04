@@ -11,18 +11,14 @@
 </nav>
 
 <div>
-    <% if (locals.page) { %>
+    <% if (locals.items) { %>
     <div>
         Paging
         <a class="<%= page == 1 ? "disabled-link" : "" %>" href="/<%= featureName %>-prev">Prev</a>
         <span><%= page %></span>
-        <a href="/<%= featureName %>-next">Next</a>
+        <a class="<%= items.length < limit ? "disabled-link" : "" %>" href="/<%= featureName %>-next">Next</a>
     </div>
-    <% } else { %>
-    <p>Default message - Paging</p>
-    <% } %>
 
-    <% if (locals.items) { %>
     <div>
         <ul>
             <% items.forEach(item => { %>
@@ -33,8 +29,10 @@
             <% }); %>
         </ul>
     </div>
-    <% } else { %>
-    <p>Default message - Item list</p>
+    <% } %>
+
+    <% if (locals.error) { %>
+    <p class="error"><%= error %></p>
     <% } %>
 </div>
 
