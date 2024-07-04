@@ -104,6 +104,10 @@
 		"includes" (instance method): determine whether an array includes a certain value e.g. "var-name.includes(element-value)".
 		"push" (instance method): add specified elements to the end of an array (and returns the new length of the array) e.g. "var-name.push(element)".
 		"pop" (instance method): removes the last element from an array (and returns that element) e.g. "var-name.pop()".
+		"find" (instance method): return first element satisfying provided function e.g. "var-name.find( callback );"; otherwise, return undefined.
+		"findIndex" (instance method): return first elements index satisfying provided function e.g. "var-name.find( callback );"; otherwise, return -1.
+		"filter" (instance method): return a collection of elements satisfying provided function e.g. "var-name.filter( callback );"; otherwise, return undefined.
+		"splice" (instance method): remove specified number of elements at starting index e.g. "var-name.splice(starting-index, element-count)".
 		
 		("Math")
 		"floor" (static method): rounds down and returns the largest integer less than or equal to a given number e.g. "Math.floor(value);".
@@ -111,9 +115,12 @@
 		"pow" (static method): returns the value of a base raised to a power e.g. "Math.pow(base, exponent);".
 		"random (static method): returns a pseudo-random floating point number in the range [0, 1) e.g. "Math.random();" - Warning! It can be scaled as "Math.floor(Math.random() * range) + offset;".
 		
-		(JSON)
+		("JSON")
 		"stringigy": serialize JS object into JSON formatted string.
 		"parse"; deserialize JSON formatted string into JS object.
+		
+		(Self-named)
+		"parseInt": parse a string into an integer.
 	
 	Web APIs - Warning! Not in the JS language, but built into the browser.
 	

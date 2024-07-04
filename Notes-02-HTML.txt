@@ -62,7 +62,7 @@
 		(Form)
 		"form": att: "action" (HTTP request endpoint), "method" (HTTP request type).
 		"label": item caption (commonly used in pairs together with "input" HTML element) att: "for" ("name" HTML attribute value from corresponding "input" HTML element)
-		"input": interactive control to accept data from the user; att: "type" (e.g. text, button, submit), "name" (just an identifier), "value" (display text), "required"; self-closing.
+		"input": interactive control to accept data from the user; att: "type" (e.g. text, button, submit), "name" (just an identifier), "value" (display text), "required", "formaction" (override parent "form" HTML element "action" attribute); self-closing.
 	
 	HTML boilerplate (i.e. the structure of an HTML file) - Warning! VS Code snippet: "!..." (file extension must be HTM or HTML).
 	

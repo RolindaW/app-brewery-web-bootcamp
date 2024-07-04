@@ -1,0 +1,15 @@
+body {
+    background-color: aquamarine;
+}
+
+.img-grid-item {
+    height: 50px;
+}
+
+.img-list-item {
+    height: 50px;
+}
+
+.disabled-link {
+    pointer-events: none;
+}

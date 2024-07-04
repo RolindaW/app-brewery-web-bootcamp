@@ -5,18 +5,46 @@
 	Programming Interface: bridge the communication between two pieces of software by some rule or protocol definition.
 	
 	Specify how to make the request and how the response is going to be given.
-	Popular architectures: GraphQL, SOAP, REST (most popular among web development; use HTTP protocol to interact with the API), gRPC.
-	Public (external use; expose specific features; well documented) vs. private (internal use e.g. between web application frontend and backend).
-	Response is most commonly formatted in JSON - Warning! It can be provided in multiple sockets so it needs to be rebuilt before processing.
+    Response is most commonly formatted in JSON - Warning! It can be provided in multiple sockets so it needs to be rebuilt before processing.
+	
+    Type:
+	
+	    Architecture: GraphQL, SOAP, REST (most popular among web development), gRPC.
+        Functionality: data collection, algorithm/service, simplified interface (to another 3rd party service).
+        Accessibility: public (external use; expose specific features; well documented) vs. private (internal use e.g. between web application frontend and backend or within a companys product suite).
 
-- API Structure
+- REST API
 
-	API Endpoint: a FIXED route on the API provider server (e.g. "base-url/endpoint"; begin after the base URL, separated by forward-slash "/" symbol); used to define different purposes of the API.
-	Query parameter: additional info about the query (e.g. "base-url/endpoint?query:value"; begin after the endpoint, separated by question-mark "?" symbol; allow multiple key-value pairs separated by ampersand "&" symbol); used for filtering and searching.
-	Path parameter: a NON-FIXED parameter (e.g. "base-url/endpoint/path-parameter"; begin after the endpoint, separated by forward-slash "/" symbol); used to represent an specific resource (e.g. id, username).
-	Body: the content of the request (e.g. a document - in the form of a byte array - to be loaded into the server).
+    REpresentational State Transfer.
+	
+    Based on HTTP protocol.
+    Client/Server separation.
+    Standard output format (e.g. JSON, XML, HTML, JS or similar).
+    Stateless (i.e. each request should contain all the information required to be processed).
+    Resource-based: reference resources by URI (Universal Resource Identifier).
+    
+    Structure:
+    
+        Base URL (Universal Resource Locator): API provider server address.
+        API Endpoint: a FIXED route on the API provider server (e.g. "base-url/endpoint"; begin after the base URL, separated by forward-slash "/" symbol); used to define different purposes of the API.
+        Query parameter: additional info about the query (e.g. "base-url/endpoint?query:value"; begin after the endpoint, separated by question-mark "?" symbol; allow multiple key-value pairs separated by ampersand "&" symbol); used for filtering and searching.
+        Path parameter: a NON-FIXED parameter (e.g. "base-url/endpoint/:path-parameter"; begin after the endpoint, separated by forward-slash "/" symbol); used to represent an specific resource (e.g. id, username).
 
 - JSON
 
 	JavaScript Object Notation: JS object is just serialized (so similar syntax) so later parsing within JS is immediate.
 	Allow to send data in a readable (altough using a JSON visualizer is recommended) but also efficient way.
+
+- Authentication
+
+	Protect resources behind the API by granting access only to authorized individuals.
+	Authentication (grant access to a registered - by username/password pair or token - user) vs. Authorization (grant access to a permitted - by key - client - i.e. non-registered user).
+	Token (issued by the API provider under demand for a registered user) vs. Key (issued by the API provider once for a client)
+	Authorization header: a type of request header containing authentication information; use "Authorization" header key; usually only one per request.
+	
+	Tiers - Warning! Encrypting sensitive data (e.g a password) during communication is a must in terms of security.
+	
+        No authetication (No Auth): optionally add a rate limit (measured in RPS - Requests Per Second; identified by IP address) as a safety check to prevent API abuse; recommended when NOT handling changing data that needs to be protected or data that needs to be assigned to a specific user.
+        Basic authentication (Basic Auth): provide username and password (commonly as a Base64 encoded string) in the authorization header; use "Basic encoded-user-pwd-str" header value.
+        API-key-based authorization (API Key): provide a client key either in a specific header (use the key name and value as the header key and value, respectively) or as a query parameter.
+        Token-based authentication (OAuth / OAuth 2.0 - standard; e.g. Bearer Token): provide a user token in the authorization header; use "token-type-name token-value" header value.

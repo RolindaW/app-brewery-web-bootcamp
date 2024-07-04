@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs") %>
+
+<div>Main content</div>
+    <% if (locals.features) { %>
+    <!-- TODO: use a grid instead of the unordered list -->
+    <ul>
+        <% features.forEach(feature => { %>
+        <li>
+            <p><%= feature.name %></p>
+            <a href="<%= feature.link %>"><img class="img-grid-item" src="<%= feature.image.filename %>" alt="<%= feature.image.description %>" /></a>
+        </li>
+        <% }); %>
+    </ul>
+    <% } else { %>
+    <p>Default message - Grid</p>
+    <% } %>
+
+<%- include("partials/footer.ejs") %>
