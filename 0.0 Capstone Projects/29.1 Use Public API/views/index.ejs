@@ -1,0 +1,17 @@
+<%- include("partials/header.ejs") %>
+
+<div>Main content</div>
+    <% if (locals.features) { %>
+    <ul>
+        <% features.forEach(feature => { %>
+        <li>
+            <p><%= feature.name %></p>
+            <img class="img-feature" src="<%= feature.image %>" alt="<%= feature.name %>" />
+        </li>
+        <% }); %>
+    </ul>
+    <% } else { %>
+    <p>Default message</p>
+    <% } %>
+
+<%- include("partials/footer.ejs") %>
