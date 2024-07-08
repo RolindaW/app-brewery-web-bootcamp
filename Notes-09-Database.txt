@@ -1,0 +1,68 @@
+
+- Data persistance
+
+	Store data permanently i.e. in a non-temporary - or non-volatile - form of memory (e.g. a variable in a program).
+	CRUD (Create Read Update Delete): basic operations of persistent storage.
+	File vs. Database
+
+- Database
+
+	Type: SQL vs. NoSQL
+
+	(SQL)
+	
+	Structured: table-based data arrangement; a.k.a relational 
+	Query Language
+	
+	Also known as a relational database because of the ability to link concepts by referencing table entries (or records) to each other.
+	Consistent (i.e. change affected data only in allowed way) and reliable (i.e. get always expected results).
+	Quick data access.
+	Provider: MySQL, SQLite, PostgreSQL, Microsoft SQL Server, Oracle Database.
+
+	(NoSQL)
+
+	Store non-structured data (e.g. text, document, media).
+	
+	Originally designed to deal with the pains that SQL entailed:
+	
+		Intuitive syntax: use of key/value pairs or document models to access data.
+		High flexibility: allow changing data content without modifying database structure (e.g. a specific entry requires additional fields that others not).
+		High scalability: either horizontal (i.e. number of fields) and vertical (i.e. number of records).
+	
+	Provider: MongoDB, Redis, DynamoDB.
+
+- SQL
+
+	Query (read data) vs. NonQuery (manage - create/update/delete - data).
+	Use of keywords - Warning! Syntax may vary depending on the database system:
+	
+	(Table)
+	
+	Store a set of records (rows) described by specific fields (columns).
+	
+	Primary key: uniquely identify (cannot be null) a record in a table (e.g. "PRIMARY KEY (<field-name>)") ; it may use one or more fields - Warning! It could be made autoincremental if it were of integer type.
+	Foreign key: point to another table (e.g. "FOREIGN KEY (<field-name>) REFERENCES <table-name>(<field-name>)"); used for joining query results.
+		
+	"CREATE TABLE <table-name> { <fields> };" where each field "<field-prototype>" (i.e. "<field-name> <field-type> <field-size>") - Warning! Fields must be comma delimited.
+	"ALTER TABLE <table-name> ADD <field-prototype>;": modify a table
+		
+	(Record)
+	
+	Each of the entries in a table.
+	
+	"INSERT INTO <table-name> VALUES ( <values> );" - Warning! Values must be comma delimited; ommit "( <fields> )" if specifying values for all fields in the table.
+	"SELECT <field-name> FROM <table-name> WHERE <condition>;" - Warning! Fields must be comma delimited; "*" symbol can be used to refer all the fields; "LIKE" keyword can be used within a condition for comparing values.
+	"UPDATE <table-name> SET <fields> WHERE <condition>;" - Warning! Fields - expressed as "<field-name> = <value>" pairs - must be comma delimited.
+	"DELETE FROM <table-name> WHERE <condition>"
+	
+	(Join)
+	
+	Combine a query on related tables.
+	
+	Inner join: e.g. "SELECT * FROM <table-1st-name> INNER JOIN <table-2nd-name> ON <table-1st-name>.<field-name> = <table-2nd-name>.<field-name>;".
+	Full outer join
+	Full outer join excluding inner join
+	Left join
+	Left join excluding inner join
+	Right join
+	Right join excluding inner join
