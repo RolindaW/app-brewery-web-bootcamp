@@ -1,35 +1,53 @@
 
 - Data persistance
 
-	Store data permanently i.e. in a non-temporary - or non-volatile - form of memory (e.g. a variable in a program).
+	Store data permanently in a non-volatile (i.e. non-temporary) form of memory.
 	CRUD (Create Read Update Delete): basic operations of persistent storage.
 	File vs. Database
 
-- Database
+- Database Management System (DBMS)
 
-	Type: SQL vs. NoSQL
-
-	(SQL)
+	Server vs. Client
 	
-	Structured: table-based data arrangement; a.k.a relational 
-	Query Language
+		(Server)
+		
+		Host the DBMS.
+		It can be hosted both locally (development) or on the cloud (testing and production).
+		It can be containerized (e.g. Docker) for portability and scalability purposes.
+		
+		(Client)
+		
+		Access (connect) and manage the DBMS:
+		
+			DBMS address: host & port.
+			Database name.
+			Access credentials: user & password.
+		
+		Type: CLI vs. GUI
 	
-	Also known as a relational database because of the ability to link concepts by referencing table entries (or records) to each other.
-	Consistent (i.e. change affected data only in allowed way) and reliable (i.e. get always expected results).
-	Quick data access.
-	Provider: MySQL, SQLite, PostgreSQL, Microsoft SQL Server, Oracle Database.
-
-	(NoSQL)
-
-	Store non-structured data (e.g. text, document, media).
+	SQL vs. NoSQL
 	
-	Originally designed to deal with the pains that SQL entailed:
-	
-		Intuitive syntax: use of key/value pairs or document models to access data.
-		High flexibility: allow changing data content without modifying database structure (e.g. a specific entry requires additional fields that others not).
-		High scalability: either horizontal (i.e. number of fields) and vertical (i.e. number of records).
-	
-	Provider: MongoDB, Redis, DynamoDB.
+		(SQL)
+		
+		Structured: table-based data arrangement.
+		Query Language
+		
+		Also known as a relational database management system (RDBMS) because of the ability to link concepts by referencing table entries (or records) to each other.
+		Consistent (i.e. change affected data only in allowed way) and reliable (i.e. get always expected results).
+		Quick data access.
+		Provider: MySQL, SQLite, PostgreSQL, Microsoft SQL Server, Oracle Database.
+		
+		(NoSQL)
+		
+		Store non-structured data (e.g. text, document, media).
+		
+		Originally designed to deal with the pains that SQL entailed:
+		
+			Intuitive syntax: use of key/value pairs or document models to access data.
+			High flexibility: allow changing data content without modifying database structure (e.g. a specific entry requires additional fields that others not).
+			High scalability: either horizontal (i.e. number of fields) and vertical (i.e. number of records).
+		
+		Provider: MongoDB, Redis, DynamoDB.
 
 - SQL
 
@@ -39,30 +57,50 @@
 	(Table)
 	
 	Store a set of records (rows) described by specific fields (columns).
-	
-	Primary key: uniquely identify (cannot be null) a record in a table (e.g. "PRIMARY KEY (<field-name>)") ; it may use one or more fields - Warning! It could be made autoincremental if it were of integer type.
+	Primary key: uniquely identify a record in a table ("UNIQUE" and "NOT NULL" by default); it may group one or more fields - Warning! It could be made autoincremental if it were of integer type.
 	Foreign key: point to another table (e.g. "FOREIGN KEY (<field-name>) REFERENCES <table-name>(<field-name>)"); used for joining query results.
-		
-	"CREATE TABLE <table-name> { <fields> };" where each field "<field-prototype>" (i.e. "<field-name> <field-type> <field-size>") - Warning! Fields must be comma delimited.
-	"ALTER TABLE <table-name> ADD <field-prototype>;": modify a table
-		
+	
+	"CREATE TABLE <table-name> ( <field-prototpye-list> );" where each field prototype ("<field-name> <field-type> <field-size>") is comma delimited - Warning! Primary key is defined at the very end referencing corresponding field e.g. "... PRIMARY KEY (<field-name>) ...".
+	"ALTER TABLE <table-name> ADD <field-prototype>;"
+	
 	(Record)
 	
 	Each of the entries in a table.
 	
-	"INSERT INTO <table-name> VALUES ( <values> );" - Warning! Values must be comma delimited; ommit "( <fields> )" if specifying values for all fields in the table.
-	"SELECT <field-name> FROM <table-name> WHERE <condition>;" - Warning! Fields must be comma delimited; "*" symbol can be used to refer all the fields; "LIKE" keyword can be used within a condition for comparing values.
-	"UPDATE <table-name> SET <fields> WHERE <condition>;" - Warning! Fields - expressed as "<field-name> = <value>" pairs - must be comma delimited.
+	"INSERT INTO <table-name> ( <field-name-list> ) VALUES ( <value-list> );" where each field name and corresponding value are commma delimited - Warning! Ommit "( <field-name-list> )" if specifying values for all fields in the table.
+	"SELECT <field-name-list> FROM <table-name> WHERE <condition>;" where each field name is comma delimited - Warning! Use "*" symbol to refer all the fields; use different type of operators such as "LIKE" keyword for comparing values in a condition.
+	"UPDATE <table-name> SET <field-value-pair-list> WHERE <condition>;" where each field-value pair ("<field-name> = <value>") is comma delimited.
 	"DELETE FROM <table-name> WHERE <condition>"
 	
 	(Join)
 	
 	Combine a query on related tables.
 	
-	Inner join: e.g. "SELECT * FROM <table-1st-name> INNER JOIN <table-2nd-name> ON <table-1st-name>.<field-name> = <table-2nd-name>.<field-name>;".
+	Inner join: e.g. "SELECT * FROM <table-name-1st> INNER JOIN <table-name-2nd> ON <table-name-1st>.<field-name> = <table-name-2nd>.<field-name>;".
 	Full outer join
 	Full outer join excluding inner join
 	Left join
 	Left join excluding inner join
 	Right join
 	Right join excluding inner join
+
+- PostgreSQL
+
+	Open source (free); widely used in industry (community support and career opportunities).
+	PostgreSQL (server) and pgAdmin (GUI client).
+	
+	(Table)
+	
+	"CREATE TABLE <table-name> ( <field-prototpye-list> );" - Warning! Primary key is defined in corresponding field declaration e.g. " ... <field-protoype> PRIMARY KEY ...".
+	
+	"SERIAL": autoincremental numeric field - Warning! Useful as generic primary key.
+	"CHAR(<size>)": fixed-size character string.
+	"VARCHAR(<max-size>)": variable-size (maximum-limited) character string.
+	"TEXT": variable-size (non-limited) character string.
+	"INT"
+	"BOOL"
+	
+	(pgAdmin)
+	
+	Find database tables in the path "<database-name> > Schemas > public > Tables".
+	Import data from CSV: Right-click on target table; select "Import/Export data" action; choose source file; finish by clicking "OK" - Warning! Specify whether source file includes headers or not in "Options (tab) > Header".

@@ -176,6 +176,16 @@
 		"params" (object): query parameters - Warning! Valid for API Key authorization.
 		"auth" (object): basic authentication username and password (e.g. "auth: { username: username-value, password: password-value }").
 		"headers" (object): headers - Warning! Valid for authentication header (e.g. "headers: { Authorization: `Bearer ${bearer-token-value}` }").
+	
+	pg
+	
+		Client for PostgreSQL database management system.
+		Install with NPM e.g. "npm install pg".
+		
+		(Client) - Warning! It must be provided with DBMS address, database name and access credentials.
+		"connect"
+		"query"
+		"end"
 
 - HTTP
 
