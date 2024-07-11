@@ -60,7 +60,7 @@
 	
 	Primary key: uniquely identify a record in a table ("UNIQUE" and "NOT NULL" by default); it may group one or more fields - Warning! It could be made autoincremental if it were of integer type.
 	Foreign key: point to another table (e.g. "FOREIGN KEY (<field-name>) REFERENCES <table-name>(<field-name>)"); used for joining query results.
-	Other constraints: "NOT NULL", "UNIQUE".
+	Other constraints: "NOT NULL", "UNIQUE" - Warning! Can be applied inline or at the very end referencing corresponding field (or field group).
 	
 	"CREATE TABLE <table-name> ( <field-prototpye-list> );" where each field prototype ("<field-name> <field-type> <field-size>") is comma delimited - Warning! Primary key is defined at the very end referencing corresponding field e.g. "... PRIMARY KEY (<field-name>) ...".
 	"ALTER TABLE <table-name> ADD <field-prototype>;"
@@ -112,6 +112,16 @@
 	
 	"CREATE TABLE <table-name> ( <field-prototpye-list> );" - Warning! Primary key is defined in corresponding field declaration e.g. " ... <field-protoype> PRIMARY KEY ...".
 	
+	"ALTER TABLE <table-name> <action>;": manipulate table schema.
+	
+		"RENAME TO <table-new-name>"
+		"ALTER COLUMN <field-name> <action>"
+		"ADD <field-prototype>" or "ADD <constraint>" (e.g. "ADD UNIQUE(<field-name-list>)").
+	
+	"DROP TABLE <table-name>;" - Warning! "IF EXISTS" keyword can be included for safety (e.g. "DROP TABLE IF EXISTS <table-name>;").
+	
+	"UPDATE <table-name> SET <field-value-pair-list> WHERE <condition>;"
+	
 	"SERIAL": autoincremental numeric field - Warning! Useful as generic primary key.
 	"CHAR(<size>)": fixed-size character string.
 	"VARCHAR(<max-size>)": variable-size (maximum-limited) character string.
@@ -129,7 +139,22 @@
 	
 	"SELECT *
 	FROM <table-name>
-	WHERE <condition>;": select all fields of "<condition>" related records in "<table-name>" table - Warning! Use single quotes for character string e.g. "... WHERE <field-name> = 'value' ..."; operators "=", ">", ">=", "<", "<=", "LIKE" (pattern: use "%" symbol for abstraction; use "||" symbol for concatenation).
+	WHERE <condition>;": select all fields of "<condition>" related records in "<table-name>" table
+	
+		Use single quotes for character string e.g. "... WHERE <field-name> = 'value' ..."
+		Operators "=", ">", ">=", "<", "<=", "LIKE" (pattern: use "%" symbol for abstraction; use "||" symbol for concatenation).
+		Use "AND" and "OR" keywords to combine conditions.
+	
+	"SELECT *
+	FROM <table-name>
+	ORDER BY <condition>;": additionally use "ASC" (ascending) as "DESC" (descending) keyword for sorting.
+	
+	"... COUNT ...": count queried record affected by specific condition.
+	
+	"... GROUP ...": query records grouped by specific field combination.
 	
 	"INSERT INTO <table-name> ( <field-name-list> )
 	VALUES ( <value-list-1st> ), ( <value-list-2nd> ), ... , ( <value-list-nth> );"
+	
+	"DELETE FROM <table-name>
+	WHERE <condition>;"
