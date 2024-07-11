@@ -1,0 +1,160 @@
+
+- Data persistance
+
+	Store data permanently in a non-volatile (i.e. non-temporary) form of memory.
+	CRUD (Create Read Update Delete): basic operations of persistent storage.
+	File vs. Database
+
+- Database Management System (DBMS)
+
+	Server vs. Client
+	
+		(Server)
+		
+		Host the DBMS.
+		It can be hosted both locally (development) or on the cloud (testing and production).
+		It can be containerized (e.g. Docker) for portability and scalability purposes.
+		
+		(Client)
+		
+		Access (connect) and manage the DBMS:
+		
+			DBMS address: host & port.
+			Database name.
+			Access credentials: user & password.
+		
+		Type: CLI vs. GUI
+	
+	SQL vs. NoSQL
+	
+		(SQL)
+		
+		Structured: table-based data arrangement.
+		Query Language
+		
+		Also known as a relational database management system (RDBMS) because of the ability to link concepts by referencing table entries (or records) to each other.
+		Consistent (i.e. change affected data only in allowed way) and reliable (i.e. get always expected results).
+		Quick data access.
+		Provider: MySQL, SQLite, PostgreSQL, Microsoft SQL Server, Oracle Database.
+		
+		(NoSQL)
+		
+		Store non-structured data (e.g. text, document, media).
+		
+		Originally designed to deal with the pains that SQL entailed:
+		
+			Intuitive syntax: use of key/value pairs or document models to access data.
+			High flexibility: allow changing data content without modifying database structure (e.g. a specific entry requires additional fields that others not).
+			High scalability: either horizontal (i.e. number of fields) and vertical (i.e. number of records).
+		
+		Provider: MongoDB, Redis, DynamoDB.
+
+- SQL
+
+	Query (read data) vs. NonQuery (manage - create/update/delete - data).
+	Use of keywords - Warning! Syntax may vary depending on the database system:
+	
+	(Table)
+	
+	Store a set of records (rows) described by specific fields (columns).
+	
+	Primary key: uniquely identify a record in a table ("UNIQUE" and "NOT NULL" by default); it may group one or more fields - Warning! It could be made autoincremental if it were of integer type.
+	Foreign key: point to another table (e.g. "FOREIGN KEY (<field-name>) REFERENCES <table-name>(<field-name>)"); used for joining query results.
+	Other constraints: "NOT NULL", "UNIQUE" - Warning! Can be applied inline or at the very end referencing corresponding field (or field group).
+	
+	"CREATE TABLE <table-name> ( <field-prototpye-list> );" where each field prototype ("<field-name> <field-type> <field-size>") is comma delimited - Warning! Primary key is defined at the very end referencing corresponding field e.g. "... PRIMARY KEY (<field-name>) ...".
+	"ALTER TABLE <table-name> ADD <field-prototype>;"
+	
+	(Record)
+	
+	Each of the entries in a table.
+	
+	"INSERT INTO <table-name> ( <field-name-list> ) VALUES ( <value-list> );" where each field name and corresponding value are commma delimited - Warning! Ommit "( <field-name-list> )" if specifying values for all fields in the table.
+	"SELECT <field-name-list> FROM <table-name> WHERE <condition>;" where each field name is comma delimited - Warning! Use "*" symbol to refer all the fields; use different type of operators such as "LIKE" keyword for comparing values in a condition.
+	"UPDATE <table-name> SET <field-value-pair-list> WHERE <condition>;" where each field-value pair ("<field-name> = <value>") is comma delimited.
+	"DELETE FROM <table-name> WHERE <condition>"
+	
+	(Join)
+	
+	Combine a query on related tables.
+	
+		Inner join: e.g. "SELECT * FROM <table-name-1st> INNER JOIN <table-name-2nd> ON <table-name-1st>.<field-name> = <table-name-2nd>.<field-name>;".
+		Full outer join
+		Full outer join excluding inner join
+		Left join
+		Left join excluding inner join
+		Right join
+		Right join excluding inner join
+	
+	Relationship:
+	
+		One to One: e.g. a student and his unique contact data.
+		One to Many / Many to One: e.g. a student and his homeworks (and viceversa).
+		Many to Many: when "Many to One" relationship in both senses e.g. a student enrolled in multiple majors and same time a major enrolling multiple student; commonly use an intermediate table for mapping.
+	
+	Alias
+	
+		Valid for both table (useful when long table name) and field (useful when joining tables containing fields sharing same name).
+		Use "AS" keyword (e.g. "... <field-name> AS <field-alias> ...") - Warning! It can also be ignored (e.g. "... <field-name> <field-alias> ...").
+
+- PostgreSQL
+
+	Open source (free); widely used in industry (community support and career opportunities).
+	PostgreSQL (server) and pgAdmin (GUI client).
+	
+	(pgAdmin)
+	
+	Query Tool: right-click on target database; select "Query Tool" action.
+	Database tables: "<database-name> > Schemas > public > Tables".
+	Import data from CSV into a database: right-click on target table; select "Import/Export data" action; choose source file; finish by clicking "OK" - Warning! Specify whether source file includes headers or not in "Options (tab) > Header".
+	
+	(Table)
+	
+	"CREATE TABLE <table-name> ( <field-prototpye-list> );" - Warning! Primary key is defined in corresponding field declaration e.g. " ... <field-protoype> PRIMARY KEY ...".
+	
+	"ALTER TABLE <table-name> <action>;": manipulate table schema.
+	
+		"RENAME TO <table-new-name>"
+		"ALTER COLUMN <field-name> <action>"
+		"ADD <field-prototype>" or "ADD <constraint>" (e.g. "ADD UNIQUE(<field-name-list>)").
+	
+	"DROP TABLE <table-name>;" - Warning! "IF EXISTS" keyword can be included for safety (e.g. "DROP TABLE IF EXISTS <table-name>;").
+	
+	"UPDATE <table-name> SET <field-value-pair-list> WHERE <condition>;"
+	
+	"SERIAL": autoincremental numeric field - Warning! Useful as generic primary key.
+	"CHAR(<size>)": fixed-size character string.
+	"VARCHAR(<max-size>)": variable-size (maximum-limited) character string.
+	"TEXT": variable-size (non-limited) character string.
+	"INT"
+	"BOOL"
+	
+	(Record)
+	
+	"SELECT *
+	FROM <table-name>;": select all fields of all records in "<table-name>" table.
+	
+	"SELECT <field-name-list>
+	FROM <table-name>;": select "<field-name-list>" fields of all records in "<table-name>" table.
+	
+	"SELECT *
+	FROM <table-name>
+	WHERE <condition>;": select all fields of "<condition>" related records in "<table-name>" table
+	
+		Use single quotes for character string e.g. "... WHERE <field-name> = 'value' ..."
+		Operators "=", ">", ">=", "<", "<=", "LIKE" (pattern: use "%" symbol for abstraction; use "||" symbol for concatenation).
+		Use "AND" and "OR" keywords to combine conditions.
+	
+	"SELECT *
+	FROM <table-name>
+	ORDER BY <condition>;": additionally use "ASC" (ascending) as "DESC" (descending) keyword for sorting.
+	
+	"... COUNT ...": count queried record affected by specific condition.
+	
+	"... GROUP ...": query records grouped by specific field combination.
+	
+	"INSERT INTO <table-name> ( <field-name-list> )
+	VALUES ( <value-list-1st> ), ( <value-list-2nd> ), ... , ( <value-list-nth> );"
+	
+	"DELETE FROM <table-name>
+	WHERE <condition>;"
