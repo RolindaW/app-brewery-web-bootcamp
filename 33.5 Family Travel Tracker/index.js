@@ -6,11 +6,11 @@ const app = express();
 const port = 3000;
 
 const db = new pg.Client({
-  user: "postgres",
-  host: "localhost",
-  database: "world",
-  password: "123456",
-  port: 5432,
+    user: "postgres",
+    host: "localhost",
+    database: "world",
+    password: "postgres",
+    port: 5432,
 });
 db.connect();
 
@@ -19,59 +19,90 @@ app.use(express.static("public"));
 
 let currentUserId = 1;
 
-let users = [
-  { id: 1, name: "Angela", color: "teal" },
-  { id: 2, name: "Jack", color: "powderblue" },
-];
+// let users = [
+//     { id: 1, name: "Angela", color: "teal" },
+//     { id: 2, name: "Jack", color: "powderblue" },
+// ];
 
-async function checkVisisted() {
-  const result = await db.query("SELECT country_code FROM visited_countries");
-  let countries = [];
-  result.rows.forEach((country) => {
-    countries.push(country.country_code);
-  });
-  return countries;
+async function checkVisisted(userId) {
+    // const result = await db.query("SELECT country_code FROM visited_countries");
+    const result = await db.query("SELECT country_code FROM visited_countries WHERE user_id = $1;", [userId]);
+    let countries = [];
+    result.rows.forEach((country) => {
+        countries.push(country.country_code);
+    });
+    return countries;
 }
+
+async function checkUsers() {
+    const result = await db.query("SELECT * FROM users;");
+    return result.rows;
+}
+
+function getUserColor(users, userId) {
+    const user = users.find((user) => user.id === userId);
+    return user.color;
+}
+
 app.get("/", async (req, res) => {
-  const countries = await checkVisisted();
-  res.render("index.ejs", {
-    countries: countries,
-    total: countries.length,
-    users: users,
-    color: "teal",
-  });
+    const countries = await checkVisisted(currentUserId);
+    const users = await checkUsers();
+    const currentUserColor = getUserColor(users, currentUserId);
+    res.render("index.ejs", {
+        countries: countries,
+        total: countries.length,
+        users: users,
+        color: currentUserColor,
+    });
 });
+
 app.post("/add", async (req, res) => {
-  const input = req.body["country"];
+    const input = req.body["country"];
 
-  try {
-    const result = await db.query(
-      "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
-      [input.toLowerCase()]
-    );
-
-    const data = result.rows[0];
-    const countryCode = data.country_code;
     try {
-      await db.query(
-        "INSERT INTO visited_countries (country_code) VALUES ($1)",
-        [countryCode]
-      );
-      res.redirect("/");
+        const result = await db.query("SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';", [input.toLowerCase()]);
+
+        const data = result.rows[0];
+        const countryCode = data.country_code;
+        try {
+            await db.query("INSERT INTO visited_countries (country_code, user_id) VALUES ($1, $2)", [countryCode, currentUserId]);
+            res.redirect("/");
+        } catch (err) {
+            console.log(err);
+        }
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
 });
-app.post("/user", async (req, res) => {});
+
+app.post("/user", async (req, res) => {
+    // console.log(req.body);
+    if (req.body.user) {
+        currentUserId = parseInt(req.body.user);
+        res.redirect("/");
+    } else {
+        res.render("new.ejs");
+    }
+});
 
 app.post("/new", async (req, res) => {
-  //Hint: The RETURNING keyword can return the data that was inserted.
-  //https://www.postgresql.org/docs/current/dml-returning.html
+    //Hint: The RETURNING keyword can return the data that was inserted.
+    //https://www.postgresql.org/docs/current/dml-returning.html
+
+    // TODO: Because of the current design of the frontend it is possible the user to submit the form without typing a username nor choosing a color, which is not correct. Furthermore, user can type an already existing username, which is not correct. These errors should be handled.
+    // console.log(req.body);
+
+    const name = req.body.name;
+    const color = req.body.color;
+
+    const result = await db.query("INSERT INTO users (name, color) VALUES($1, $2) RETURNING *;", [name, color]);
+
+    const id = result.rows[0].id;
+    currentUserId = id;
+
+    res.redirect("/");
 });
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
