@@ -71,3 +71,5 @@
 	
 	Terminal: View > Terminal
 	It is possible to launch multiple profiles (e.g. PowerShell, Command Prompt) at same time.
+	
+	File comparing: Right click on file A > Select for Compare; Right click on file B > Compare with Selected.

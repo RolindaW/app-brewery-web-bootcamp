@@ -1,0 +1,108 @@
+
+- Authentication
+
+	Purpose: identify each user; restrict access to specific content.
+	Levels:
+	
+		L1 (least secure): username (e.g. e-mail) and password.
+		L2: encryption and hashing.
+		L3: salting.
+		L4: cookies and sessions.
+		L5: environment variables.
+		L6: OAuth.
+
+- Sign-in
+
+	User already exists?
+	
+		Yes: handle error.
+		No: create new user.
+	
+	Automatic log-in vs. redirecting to log-in webpage.
+
+- Log-in
+
+	User exists?
+		
+		Yes: check password. Is it correct?
+		
+			Yes: log-in
+			No: handle error.
+		
+		No: handle error.
+
+- Encoding
+
+	Symmetric (can be reverted) process of converting data into a code (reversible) using a publicly known standard.
+	Encode (text to code) vs. Decode (code to text).
+
+- Encryption
+
+	Symmetric process of converting data into a code (a.k.a. cipher) using a secret key.
+	
+	Encrypt (text to code) vs. Decrypt (code to text)
+	Text + (Key + Cipher method) = Code	- Warning! Encryption key must be known by destination so code can be decrypted back into original text.
+	
+	Caesar cipher (named after Julius Caesar): very popular; left-shift "n" characters on encryption and right-shift on decryption.
+	Enigme cipher: substitution.
+	AES cipher: use a secret key and complex mathematic algorithms; there exist multiple variations e.g. AES 256.
+
+- Hashing
+
+	Asymmetric (cannot be reverted) process of converting data into a code (a.k.a. hash) - Warning! The password is no longer stored in the persistence system, but the corresponding hash.
+	
+	Text + Hashing function = Code - Warning! The only way of hacking original value is by trial and error.
+	
+	MD5
+	SHA-1, SHA-2, SHA-3
+	RIPEMD-160
+	Whirlpool
+	BLAKE2, BLAKE3
+	bcrypt (a.k.a. Blowfish cipher)
+	scrypt
+	
+	Using a "hash table" (i.e. a text-hash pair list for multiple candidate entries) is a common way to try hacking a password (by contrasting against the hash of target password) e.g. all the words from the dictionary, all the telephone numbers or all possible combinations of 6 characters) and contrast against the hash of target password.
+	Is it possible to find already made hash table (e.g. top 10.000 most common passwords in the year 2024).
+
+	(Salting)
+
+		Take hashing one step further to prevent dictionary and hash-table attacks.
+		(Text + "salt") + Hashing function = Code - Warning! Where "salt" stands for a random generated key for each password.
+		
+		Salt rounds: it is possible to increase security by repeating the salting process by subsequently feeding back the output of previous iterations.
+
+- Cookies
+
+	Persist user information in the browser.
+	Types: session, persisten, 3rd-party, 1st-party, UX, advertising, analytics...
+	
+	(Session)
+	Hold user credentials so the application can automatically check authetication anytime is required during the session.
+	Start: log-in; end: log-out.
+
+- Environment variables
+
+	Variables (secrets e.g. API keys, DB connetion parameters) out of the code base.
+	Contained in a file (commonly ".env" extension - and variants) - Warning! Must be ignored by the repository.
+	Why? Convenience (can modify without touching the code base) & Security: no one who is not authorized - even with access to the cobe base - can access.
+
+- OAuth
+
+	Open Authorization
+	
+	Token-based authorization.
+	Advantages:
+	
+		Do not need to store any password (or similar e.g. hash) - Warning! A username-kind field (i.e. e-mail or corresponding 3rd-party company id) is still actually required in order to identify the user and store per-user data; 3rd-party company assume all the responsibility (e.g. Google, Facebook, LinkedIn).
+		Granular access level: can request only specific data (e.g. user profile or e-mail address).
+		Read only / Read & Write access.
+		Revoke access: user is able to deauthorize external access (i.e. to as as developers) from the 3rd-party company providing OAuth service.
+	
+	Steps:
+	
+		Register our application in the 3rd-party company providing OAuth service.
+		Redirect the autentication of our application to 3rd-party company.
+		User log-in in the 3rd-party company.
+		User grants permissions our application is asking for over 3rd-party company (e.g. users profile and e-mail address).
+		Our application receive authorization code (single time access) from 3rd-party company- Warning! Simply indicates that the user has successfully logged into 3rd-party company.
+		Exchange with 3r-party company our authorization code to get an access token (multiple time access) which we can retrieve any data the user granted permissions before.

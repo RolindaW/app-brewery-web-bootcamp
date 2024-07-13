@@ -186,6 +186,29 @@
 		"connect"
 		"query"
 		"end"
+	
+	bcrypt
+	
+		Blowfish cipher encrypting tool.
+		"hash"
+		"compare"
+	
+	express-session
+	
+		Middleware; sessions.
+		Persist session cookies in client web browser.
+	
+	passport
+	
+		Middleware; authentication - Warning! Must be initialized after session initialization.
+		Provides hundreds of strategies: local strategy vs. standard services (e.g. Google, Facebook, LinkedIn or GitHub) - Warning! Each strategy must be installed as a separated module (e.g. "passport-local" module for local strategy or "passport-google-oauth2" for google OAuth 2.0 strategy).
+	
+	dotenv
+	
+		Middleware; environment variables.
+		
+		Environment variables defined in the form of key-value pairs on individual lines e.g. "ENV_VAR_NAME="value"" accessed in the code like "process.env.ENV_VAR_NAME" - Warning! File extension must be ".env".
+		"config": initialize the module.
 
 - HTTP
 
