@@ -1,0 +1,61 @@
+
+- React
+
+	Frontend framework (mainly web).
+	Modular & Scalable: reuse custom HTML-like components.
+	
+		Combine HTML, CSS and JS code in the same file - Warning! Violation of the separation of concerns principle.
+		Each component controls own styling and functionality.
+		Individual change detection by comparing DOM tree (a.k.a diffing) and so refreshing.
+	
+	Alternatives: Angular, Vue.
+	Full-stack (i.e. backend - routing and data fetching - included) React frameworks: Next.js, Remix.
+
+- CodeSandbox
+
+	Online IDE originally built for React
+	Alternatives: Vite (local).
+	
+	It allows to easily download a copy - compressed file - of the code in a "draft".
+	Includes hosting features.
+
+- Babel
+
+	JS compiler.
+	Convert ECMAScript 2015+ code into a backwards compatible version of JS in current and older browsers or environments - Warning! It can also convert JSX syntax.
+
+- JSX
+
+	JavaScript Syntax eXtension (a.k.a. JavaScript XML).
+	
+	Used extensively in (but not proprietary/restricted to) React.
+	XML-like syntax for JS to describe how UI should look like (i.e. insert HTML code using JS code) - Warning! JSX code is first compiled into vanilla JS by React (actually Babel), then normally executed.
+	
+	JS Expression
+	
+		Embed JS expressions (e.g. variable, mathematical operation, function output) into being inserted HTML code - Warning! It do not work with anything different from expressions e.g. statements.
+		Use of curly braces "{ JS-expression }" (e.g. "<h1>Welcome, {name}!</h1>" where "name" is a JS variable).
+	
+	HTML Attributes
+	
+		Use camel case for HTML attribute naming (e.g. "classname" as "className").
+	
+	Styling
+	
+		"className" (global HTML attribute): recommended to apply all styles through classes.
+
+- Framework
+
+	"index.html": main file - Warning! All the code is actually writen in JS - which is referenced by a JS script HTML element in this file.
+	"<div id="root"></div>": entry point (or root) of a React application; contain everything created with React.
+	
+	Dependencies
+	
+		("react")
+		React: the core; define and create components, manage hooks, compile (using Babel compiler behind scenes) JSX into JS.
+		Import: CJS (e.g. "var React = require("react");") vs ESM (e.g. "import React from "react";").
+		
+		("react-DOM")
+		React DOM: glue between React and the DOM - Warning! Contain features only supported for web applications (i.e. which run in the browser DOM environment).
+		Import: CJS (e.g. "ReactDOM = require("react-dom");") vs. ESM (e.g. "import ReactDOM from "react-dom";").
+		"render" (instance method): Add an HTML element into specified HTML element - Warning! LEGACY: deprecated on version 18; current syntax is "createRoot(); + root.render();".
