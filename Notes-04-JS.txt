@@ -17,7 +17,12 @@
 	
 	Variable:
 	
-		Declaration: "var var-name;" - Warning! It is possible to initialize on declaration.
+		Declaration: use corresponding keyword (e.g. "var var-name;") - Warning! It can be (optional) initialized (i.e. to assign a value on declaration).
+		
+			"var": can be updated; can be declared and accessed globally; can be re-declared within same scope.
+			"let": can be updated; can be declared globally but access is limited to the block in which it is declared; cannot be re-declared.
+			"const": cannot be updated.
+		
 		Assigment: operator "=" e.g. "var-name = value;" - Warning! There are alternative assigment operators e.g. "+=", "-=", "*=", "/=".
 		Naming: use meaningful names; be consistent with rules (e.g. use "camelCase" always); can contain characters, numbers, dolar sign and undescore - Warning! Numbers and keywords only if both combined and not in the beginning.
 	
@@ -85,6 +90,17 @@
 		Event delegation: handler element is different from trigger element.
 	
 	API (Application Programm Interface): an interface to interact with another system (which may be a library i.e. a collection of code that does a job).
+	
+	Expression vs. statement - Warning! Cannot be combined.
+	
+		Expression: notation that resolves to a value i.e. that can be evaluated (e.g. "const x = 5", "2+3" and "function getResult() { ... }" are all expressions resolving to the same value "5").
+		Statement: an instruction (or action) i.e. do not resolve to a value (e.g. "if ...", "for ...", "while ...").
+
+- ES6
+
+	Warning! May be deprecated (current version is ES14 - 2023).
+	
+	Template literals (a.k.a. string interpolation): use of backticks "``", dolar sign "$" and curly braces "{}" (e.g. "const message = `My name is ${fName} ${lName}`;" where "fName" and "lName" are to variables).
 
 - JS resources
 
